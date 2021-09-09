@@ -1,0 +1,17 @@
+[book]
+authors = ["99Cloud"]
+language = "zh-CN"
+multilingual = false
+src = "src"
+title = "IaaS Documents"
+
+[rust]
+edition = "2018"
+
+[build]
+create-missing = false
+
+[output.html]
+mathjax-support = true
+no-section-label = false
+copy-fonts = false
