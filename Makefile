@@ -1,6 +1,6 @@
 SOURCES := src
 TOOLS := tools
-DIST := book
+DIST := docs
 ROOT_DIR ?= $(shell git rev-parse --show-toplevel)
 
 DPRINT_VERSION := 0.15.0
@@ -17,7 +17,7 @@ endif
 
 .PHONY: help
 help:
-	@echo "IaaS documents development makefile"
+	@echo "Utopia's book makefile"
 	@echo
 	@echo "Usage: make <TARGET>"
 	@echo

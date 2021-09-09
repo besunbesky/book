@@ -1,0 +1,868 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN" class="sidebar-visible no-js light">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Rainning in the utopia</title>
+                <meta name="robots" content="noindex" />
+                
+
+        <!-- Custom HTML head -->
+        
+
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+                <link rel="icon" href="favicon.svg">
+                        <link rel="shortcut icon" href="favicon.png">
+                <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+                <link rel="stylesheet" href="css/print.css" media="print">
+        
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="highlight.css">
+        <link rel="stylesheet" href="tomorrow-night.css">
+        <link rel="stylesheet" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        
+                <!-- MathJax -->
+        <script async type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+            </head>
+    <body>
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="index.html">概述</a></li><li class="spacer"></li><li class="chapter-item expanded affix "><li class="part-title">JavaScript</li><li class="chapter-item expanded "><div><strong aria-hidden="true">1.</strong> </div></li><li class="chapter-item expanded affix "><li class="part-title">React</li><li class="chapter-item expanded "><div><strong aria-hidden="true">2.</strong> 虚拟DOM</div></li><li><ol class="section"><li class="chapter-item expanded "><a href="React/虚拟DOM.html"><strong aria-hidden="true">2.1.</strong> 虚拟DOM</a></li><li class="chapter-item expanded "><a href="React/手动实现一个虚拟DOM.html"><strong aria-hidden="true">2.2.</strong> 手动实现一个虚拟DOM</a></li><li class="spacer"></li></ol></li></ol>            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                                                <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                                            </div>
+
+                    <h1 class="menu-title">Rainning in the utopia</h1>
+
+                    <div class="right-buttons">
+                                                <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                                                                        
+                    </div>
+                </div>
+
+                                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+                
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="概括"><a class="header" href="#概括">概括</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="虚拟dom"><a class="header" href="#虚拟dom">虚拟DOM</a></h1>
+<h2 id="虚拟dom是什么"><a class="header" href="#虚拟dom是什么">虚拟DOM是什么</a></h2>
+<p><a href="https://www.runoob.com/htmldom/htmldom-tutorial.html">首先了解一下DOM是什么</a>:</p>
+<blockquote>
+<p>DOM (Document Object Model) 译为文档对象模型，是 HTML 和 XML 文档的编程接口。<br />
+HTML DOM 定义了访问和操作 HTML 文档的标准方法。<br />
+DOM 以树结构表达 HTML 文档。</p>
+</blockquote>
+<p>然后我们来做一个小实验：</p>
+<pre><code class="language-js">const div = document.createElement('div');
+let str = '';
+for(let i in div) {
+  str += `${i} `
+}
+const attrs = str.split(' ')
+console.log(attrs.splice(0,5), attrs.length)
+</code></pre>
+<p>out</p>
+<pre><code class="language-js">(5) [&quot;align&quot;, &quot;title&quot;, &quot;lang&quot;, &quot;translate&quot;, &quot;dir&quot;] 294
+</code></pre>
+<p>我们可以看到浏览器对 <code>DOM</code> 赋予了很多属性来实现页面的各种功能，整个 <code>DOM</code> 的设计是相当复杂的。</p>
+<p>当我们使用 <code>document.body.appendChild(node)</code> 往 <code>body</code> 节点上添加一个元素，调用该 <code>API</code> 之后会引发一系列的连锁反应。<br />
+首先渲染引擎会将 <code>node</code> 节点添加到 <code>body</code> 节点之上，然后触发样式计算、布局、绘制、栅格化、合成等任务，我们把这一过程称为重排。<br />
+除了重排之外，还有可能引起重绘或者合成操作，形象地理解就是“牵一发而动全身”。<br />
+另外，对于 <code>DOM</code> 的不当操作还有可能引发强制同步布局和布局抖动的问题，这些操作都会大大降低渲染效率。<br />
+因此，对于 <code>DOM</code> 的操作我们时刻都需要非常小心谨慎。</p>
+<p>当然，对于简单的页面来说，其 <code>DOM</code> 结构还是比较简单的，所以以上这些操作 <code>DOM</code> 的问题并不会对用户体验产生太多影响。<br />
+但是对于一些复杂的页面或者目前使用非常多的单页应用来说，其 <code>DOM</code> 结构是非常复杂的，而且还需要不断地去修改 <code>DOM</code> 树，每次操作 <code>DOM</code> 渲染
+引擎都需要进行重排、重绘或者合成等操作，因为 <code>DOM</code> 结构复杂，所生成的页面结构也会很复杂，对于这些复杂的页面，执行一次重排或者重绘操作 都是非常耗时的，这就给我们带来了真正的性能问题。</p>
+<p>所以我们需要有一种方式来减少 JavaScript 对 <code>DOM</code> 的操作，这时候虚拟 <code>DOM</code> 就上场了。</p>
+<p>简而言之，我们需要用一种方式去描述浏览器的 <code>DOM</code> 结构，并且在数据更新的过程中通过虚拟 <code>DOM</code> 的对比来做一层“缓冲”。避免频繁的直接操作 <code>DOM</code> 对象。</p>
+<h2 id="什么是虚拟dom"><a class="header" href="#什么是虚拟dom">什么是虚拟<code>DOM</code></a></h2>
+<p>在谈论什么是虚拟 <code>DOM</code> 之前，我们先来看看虚拟 <code>DOM</code> 到底要解决哪些事情。</p>
+<ul>
+<li>将页面改变的内容应用到虚拟 <code>DOM</code> 上，而不是直接应用到 <code>DOM</code> 上。</li>
+<li>变化被应用到虚拟 <code>DOM</code> 上时，虚拟 <code>DOM</code> 并不急着去渲染页面，而仅仅是调整虚拟 <code>DOM</code> 的内部状态，这样操作虚拟 <code>DOM</code> 的代价就变得非常轻了。</li>
+<li>在虚拟 <code>DOM</code> 收集到足够的改变时，再把这些变化一次性应用到真实的 <code>DOM</code> 上。</li>
+</ul>
+<p>基于以上三点，我们再来看看什么是虚拟 DOM。为了直观理解，你可以参考下图：</p>
+<p><img src="React/./images/%E8%99%9A%E6%8B%9Fdom%E7%A4%BA%E6%84%8F%E5%9B%BE.png" alt="虚拟dom示意图.png" /></p>
+<p>该图结合 React 流程画的一张虚拟 <code>DOM</code> 执行流程图，下面我们就结合这张图来分析下虚拟 <code>DOM</code> 到底怎么运行的。</p>
+<p>创建阶段。首先依据 JSX 和基础数据创建出来虚拟 DOM，它反映了真实的 <code>DOM</code> 树的结构。然后由虚拟 <code>DOM</code> 树创建出真实 <code>DOM</code> 树，真实的 <code>DOM</code> 树生成完后，
+再触发渲染流水线往屏幕输出页面。</p>
+<p>更新阶段。如果数据发生了改变，那么就需要根据新的数据创建一个新的虚拟 <code>DOM</code> 树；然后 React 比较两个树，找出变化的地方，并把变化的地方一次性更新到真实的 <code>DOM</code> 树上</p>
+<p>最后渲染引擎更新渲染流水线，并生成新的页面。</p>
+<p>通过上面的描述，我们知道，当我们使用一个JS对象来描述浏览器的 <code>DOM</code> 结构的时候，这个对象就叫做虚拟 <code>DOM</code>。（浏览器的 <code>DOM</code> 对象过于复杂）</p>
+<p>下面这段话是我摘录的一段对于虚拟 <code>DOM</code>的描述。</p>
+<blockquote>
+<ol>
+<li><code>Virtual DOM</code> 是一种编程概念。在这个概念里， <code>UI</code> 以一种理想化的，或者说“虚拟的”表现形式被保存于内存中，并通过如 <code>ReactDOM</code> 等类库使之与“真实的”
+<code>DOM</code> 同步。这一过程叫做协调。</li>
+<li>这种方式赋予了 <code>React</code> 声明式的 <code>API</code>：你告诉 <code>React</code> 希望让 <code>UI</code> 是什么状态，<code>React</code> 就确保 <code>DOM</code> 匹配该状态。这使您可以从属性操作、
+事件处理和手动 <code>DOM</code> 更新这些在构建应用程序时必要的操作中解放出来。</li>
+<li>与其将 <code>Virtual DOM</code> 视为一种技术，不如说它是一种模式，人们提到它时经常是要表达不同的东西。在 <code>React</code> 的世界里，术语 <code>Virtual DOM</code> 通常 与
+<code>React</code> 元素关联在一起，因为它们都是代表了用户界面的对象。</li>
+<li>而 <code>React</code> 也使用一个名为 <code>fibers</code> 的内部对象来存放组件树的附加信息。上述二者也被认为是 <code>React</code> 中 <code>Virtual DOM</code> 实现的一部分。</li>
+</ol>
+</blockquote>
+<p>我们来总结一下上面的话中比较重要的两点：</p>
+<ol>
+<li>虚拟 <code>DOM</code> 和真实 <code>DOM</code> 的交互不由虚拟 <code>DOM</code> 直接完成，交由第三方库完成，虚拟 <code>DOM</code> 只描述 <code>UI</code>，<code>UI</code> 到具体的展现，由 <code>ReactDOM</code>
+等类库实现真正的渲染。 因此，<code>ReactNative</code>，小程序等跨端开发才得以实现。</li>
+<li><code>React</code> 之类的类库，替你摆脱了频繁书写 <code>DOM</code> 操作的指令的坑，你不必再去书写类似 <code>document.getElementById(xxx).appendChild(xxx)</code>
+之类的代码。 他们来负责数据变动到视图变动的过程。</li>
+</ol>
+<p>在 <code>React</code> 或者 <code>Vue</code> 中，虚拟 <code>DOM</code> 的创建都是由模板或者 <code>JSX</code> 来完成的，但是这两者到虚拟 <code>DOM</code> 的转移都是工程化干的事情（<code>webpack</code> +
+<code>loader</code>），因此我们也不需要去书写类似 <code>React.createElement(xxx)</code> 的代码，只需要书写 <code>JSX</code> 即可以通过工程化自动生成上面的代码。</p>
+<p>因此虚拟 <code>DOM</code> 极大程度上帮我们减轻了开发的负担，易于维护，并且不依赖于某一特定的环境。</p>
+<h2 id="vdom的优点"><a class="header" href="#vdom的优点">VDOM的优点</a></h2>
+<ul>
+<li>
+<p>抽象了原本的渲染过程，实现了跨平台的的能力，从而不局限于浏览器的 <code>DOM</code>，也可以是安卓和 <code>IOS</code> 的原生组件，也可以是小程序。</p>
+</li>
+<li>
+<p>抽象了渲染过程之后，使得组件的抽象能力也得到了提升，并且可以适配 <code>DOM</code> 以外的渲染目标。</p>
+</li>
+<li>
+<p><code>VDOM</code> 在牺牲了部分性能的前提下，增加了可维护性，这也是很多框架的通性。 实现了对 <code>DOM</code> 集中化操作，在数据改变的时候先对 <code>VDOM</code>
+进行修改，再反映到真实的DOM中，用最小的代价来更新 <code>DOM</code> ，提升效率。</p>
+</li>
+<li>
+<p>打开了函数式 <code>UI</code> 编程的大门</p>
+</li>
+<li>
+<p>跨平台（ <code>ReactNative</code> ，<code>React VR</code> 等）</p>
+</li>
+<li>
+<p>可以更好的实现 <code>SSR</code>，同构渲染等</p>
+</li>
+<li>
+<p>组件的高度抽象化</p>
+</li>
+</ul>
+<h2 id="vdom的缺点"><a class="header" href="#vdom的缺点">VDOM的缺点</a></h2>
+<ul>
+<li>首次渲染大量 <code>DOM</code> 的时候，由于多了一层虚拟 <code>DOM</code> 的计算，所以会比 <code>innerHTML</code> 插入的慢。</li>
+<li>需要在内存中维护一份 <code>VDOM</code></li>
+<li>如果虚拟 <code>DOM</code> 有着大量的更改，使用虚拟 <code>DOM</code> 是很合适的，如果是单一的频繁的更新的话，虚拟 <code>DOM</code> 需要花时间去处理计算工作。<br />
+因此如果你有一个 <code>DOM</code> 节点相对较少的页面，使用 <code>VDOM</code> 可能会变慢。<br />
+但是对于大多数单页面应用，使用 <code>VDOM</code> 应该是更快的</li>
+</ul>
+<h2 id="react-中的-diff-算法"><a class="header" href="#react-中的-diff-算法">React 中的 diff 算法</a></h2>
+<p><a href="https://blog.csdn.net/qq_36407875/article/details/84965311">React的虚拟DOM与diff算法的理解</a></p>
+<p><a href="https://zhuanlan.zhihu.com/p/34363711">React源码分析 - Diff算法</a></p>
+<h2 id="关于react中的虚拟dom"><a class="header" href="#关于react中的虚拟dom">关于React中的虚拟DOM</a></h2>
+<p><a href="https://zhuanlan.zhihu.com/p/50218605">React中的虚拟DOM</a></p>
+<blockquote>
+<p><code>Fiber</code> 架构之后的不同。可以自行搜索 <code>Fiber</code> 相关的内容。<br />
+<code>Fiber</code> 之后，虚拟 <code>DOM</code> 从树形结构变为了可恢复的链表的结构。</p>
+</blockquote>
+<p><code>Fiber</code> 的出现主要是为了解决在大量 <code>dom diff</code> 的过程中，保证渲染流畅，（原来的 <code>stack reconciler</code> 会在 <code>diff</code>
+过程中阻塞线程，导致页面卡顿，因为只有<code>diff</code> 完成之后才会渲染页面）<br />
+其实协程的另外一个称呼就是 <code>Fiber</code>，所以在这里我们可以把 <code>Fiber</code> 和协程关联起来，那么所谓的 <code>Fiber reconciler</code> 相信你也很清楚了，就是在执行算法的过程中出让主线程</p>
+<p>这样就解决了 <code>Stack reconciler</code> 函数占用时间过久的问题。<br />
+实际上的思想类似于时间切片的概念。<br />
+主要利用了浏览器 <code>requestIdleCallback</code> 这个 <code>API</code></p>
+<h2 id="关于vue中的虚拟dom"><a class="header" href="#关于vue中的虚拟dom">关于Vue中的虚拟DOM</a></h2>
+<p>整体的实现思路大致类似上面的手动实现的方法。</p>
+<p>以 <code>Vue2.x</code> 为例，可以在源码中找到<a href="https://github.com/vuejs/vue/blob/dev/src/core/vdom/patch.js">这个文件</a>来看一下。</p>
+<p>在 <code>Vue3.x</code> 中并没有引进 <code>Fiber</code> 这一架构，具体原因可以在拓展阅读中查看。</p>
+<h2 id="拓展阅读"><a class="header" href="#拓展阅读">拓展阅读</a></h2>
+<ol>
+<li><a href="https://blog.csdn.net/qq_29582173/article/details/103078900">如何实现一个简单的虚拟dom</a></li>
+<li><a href="https://zhuanlan.zhihu.com/p/135214155">尤大Vue3.0直播虚拟Dom总结(和React 对比)</a></li>
+</ol>
+<div style="break-before: page; page-break-before: always;"></div><p>手动实现一个简单的虚拟 <code>DOM</code> (类似 <code>Vue2.x</code> ， <code>React</code> 中的 <code>Fiber</code> 太过于复杂)</p>
+<h1 id="创建"><a class="header" href="#创建">创建</a></h1>
+<p>我们来尝试简单渲染一个 <code>DOM</code> 结构，</p>
+<pre><code class="language-html">&lt;div id='app'&gt;
+  &lt;p&gt;节点1&lt;/p&gt;
+&lt;/div&gt;
+</code></pre>
+<p>我们有一个最简陋的 <code>createElement</code> 函数来返回一个虚拟 <code>DOM</code></p>
+<pre><code class="language-js">const vnodeType = {
+  HTML: 'HTML',
+  TEXT: 'TEXT',
+
+  COMPONENT: 'COMPONENT',
+  CLASS_COMPONENT: 'CLASS_COMPONENT',
+}
+
+const childType = {
+  EMPTY: 'EMPTY',
+  SINGLE: 'SINGLE',
+  MULTIPLE: 'MULTIPLE',
+}
+
+
+// 新建虚拟DOM
+// 名字，属性，子元素
+function createElement(tag, data, children = null) {
+
+  let flag;
+  if (typeof tag === 'string') {
+    // 普通html标签
+    flag = vnodeType.HTML
+  } else if (typeof tag === 'function') {
+    flag = vnodeType.COMPONENT
+  } else {
+    flag = vnodeType.TEXT
+  }
+
+  // 0， 1， n
+  let childrenFlag;
+  if (children == null) {
+    childrenFlag = childType.EMPTY
+  } else if (Array.isArray(children)) {
+    let length = children.length
+    if (length === 0) {
+      childrenFlag = childType.EMPTY
+    } else {
+      childrenFlag = childType.MULTIPLE
+    }
+  } else {
+    childrenFlag = childType.SINGLE
+    children = createTextVnode(children + '')
+  }
+
+
+  // 返回vnode
+  return {
+    flag, //vnode类型
+    tag, // 标签，div文本没有tag，组件就是函数
+    data,
+    children,
+    childrenFlag
+  }
+}
+
+//渲染
+function render() {
+
+}
+
+// 创建文本类型 vnode
+function createTextVnode(text) {
+  return {
+    flag: vnodeType.TEXT,
+    tag: null,
+    data: null,
+    children: text,
+    childrenFlag: childType.EMPTY
+  }
+}
+</code></pre>
+<p>页面上</p>
+<pre><code class="language-js">let div = createElement('div', { id: 'app' }, [
+    createElement('p', {}, '节点1'),
+  ]);
+console.log(JSON.stringify(div, null, 2))
+</code></pre>
+<p>out</p>
+<pre><code class="language-json">{
+  &quot;flag&quot;: &quot;HTML&quot;,
+  &quot;tag&quot;: &quot;div&quot;,
+  &quot;data&quot;: {
+    &quot;id&quot;: &quot;app&quot;
+  },
+  &quot;children&quot;: [
+    {
+      &quot;flag&quot;: &quot;HTML&quot;,
+      &quot;tag&quot;: &quot;p&quot;,
+      &quot;data&quot;: {},
+      &quot;children&quot;: {
+        &quot;flag&quot;: &quot;TEXT&quot;,
+        &quot;tag&quot;: null,
+        &quot;data&quot;: null,
+        &quot;children&quot;: &quot;节点1&quot;,
+        &quot;childrenFlag&quot;: &quot;EMPTY&quot;
+      },
+      &quot;childrenFlag&quot;: &quot;SINGLE&quot;
+    }
+  ],
+  &quot;childrenFlag&quot;: &quot;MULTIPLE&quot;
+}
+</code></pre>
+<p>接下来我们将它渲染到页面上。</p>
+<h1 id="渲染"><a class="header" href="#渲染">渲染</a></h1>
+<p>我们搞多一些 <code>p</code> 元素在页面上，并且调用 <code>render</code> 函数来渲染。</p>
+<pre><code class="language-html">&lt;html lang=&quot;en&quot;&gt;
+
+&lt;head&gt;
+  &lt;meta charset=&quot;UTF-8&quot; /&gt;
+  &lt;meta http-equiv=&quot;X-UA-Compatible&quot; content=&quot;IE=edge&quot; /&gt;
+  &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot; /&gt;
+  &lt;title&gt;Document&lt;/title&gt;
+  &lt;style&gt;
+    .item-header {
+      font-size: 30px;
+      color: green;
+    }
+  &lt;/style&gt;
+&lt;/head&gt;
+
+&lt;body&gt;
+  &lt;div id='app'&gt;&lt;/div&gt;
+  &lt;script src='./index.js'&gt;&lt;/script&gt;
+  &lt;script&gt;
+    let vnode = createElement('div', { id: 'app' }, [
+      createElement('p', { key: 'a', style: { color: 'blue' } }, '节点1'),
+      createElement('p', { key: 'b', '@click': () =&gt; alert('xxx') }, '节点2'),
+      createElement('p', { key: 'c', 'class': 'item-header' }, '节点3'),
+      createElement('p', { key: 'd' }, '节点4'),
+    ]);
+    render(vnode, document.getElementById('app'))
+    // console.log(JSON.stringify(div, null, 2))
+  &lt;/script&gt;
+&lt;/body&gt;
+
+&lt;/html&gt;
+</code></pre>
+<p>还有一些额外的工作（简易版本），需要注意以下的一些问题。</p>
+<ul>
+<li>属性的处理。</li>
+<li>首次渲染和 <code>diff</code></li>
+<li><code>el</code> 属性</li>
+<li>递归渲染子元素</li>
+</ul>
+<p>简易版的代码如下:</p>
+<pre><code class="language-js">const vnodeType = {
+  HTML: 'HTML',
+  TEXT: 'TEXT',
+
+  COMPONENT: 'COMPONENT',
+  CLASS_COMPONENT: 'CLASS_COMPONENT',
+};
+
+const childType = {
+  // 节点没有子元素或者是空数组
+  EMPTY: 'EMPTY',
+  // 节点是文本元素
+  SINGLE: 'SINGLE',
+  // 节点有1或多个子元素
+  MULTIPLE: 'MULTIPLE',
+};
+
+// 新建虚拟DOM
+// 名字，属性，子元素
+function createElement(tag, data, children = null) {
+  let flag;
+  if (typeof tag === 'string') {
+    // 普通html标签
+    flag = vnodeType.HTML;
+  } else if (typeof tag === 'function') {
+    flag = vnodeType.COMPONENT;
+  } else {
+    flag = vnodeType.TEXT;
+  }
+
+  // 0， 1， n
+  let childrenFlag;
+  if (children == null) {
+    childrenFlag = childType.EMPTY;
+  } else if (Array.isArray(children)) {
+    let length = children.length;
+    if (length === 0) {
+      childrenFlag = childType.EMPTY;
+    } else {
+      childrenFlag = childType.MULTIPLE;
+    }
+  } else {
+    childrenFlag = childType.SINGLE;
+    // 文本元素直接给textVnode节点
+    children = createTextVnode(children + '');
+  }
+
+  // 返回vnode
+  return {
+    flag, //vnode类型
+    tag, // 标签，div文本没有tag，组件就是函数
+    data,
+    children,
+    childrenFlag,
+    el: null,
+  };
+}
+
+//渲染
+function render(vnode, container) {
+  // 区分首次渲染和再次渲染
+  // 首次渲染直接mount，再次渲染需要diff
+  mount(vnode, container);
+}
+
+// 首次挂载元素
+function mount(vnode, container) {
+  let { flag } = vnode;
+  // 区别对待HTML节点和Text节点
+  if (flag === vnodeType.HTML) {
+    mountElement(vnode, container);
+  } else if (flag === vnodeType.TEXT) {
+    mountText(vnode, container);
+  }
+}
+
+function mountElement(vnode, container) {
+  let dom = document.createElement(vnode.tag);
+  // 存一下，以后都能拿到真实dom
+  vnode.el = dom;
+  let { data, children, childrenFlag } = vnode;
+
+  // 挂载data属性
+  if (data) {
+    for (let key in data) {
+      // 节点，名字，老值，新值
+      patchData(dom, key, null, data[key]);
+    }
+  }
+
+  // 根据子元素的不同类型来渲染子元素
+  if (childrenFlag !== childType.EMPTY) {
+    if (childrenFlag === childType.SINGLE) {
+      mount(children, dom);
+    } else if (childrenFlag == childType.MULTIPLE) {
+      for (let i = 0; i &lt; children.length; i++) {
+        mount(children[i], dom);
+      }
+    }
+  }
+
+  // 挂载
+  container.appendChild(dom);
+}
+function mountText(vnode, container) {
+  let dom = document.createTextNode(vnode.children);
+  vnode.el = dom;
+
+  // 挂载
+  container.appendChild(dom);
+}
+
+function patchData(el, key, pre, next) {
+  switch (key) {
+    // 处理style属性
+    case 'style':
+      for (let k in next) {
+        el.style[k] = next[k];
+      }
+      break;
+    // 处理class属性
+    case 'class':
+      el.className = next;
+      break;
+    // 其他
+    default:
+      // 处理事件绑定函数，以vue的@为例
+      if (key[0] === '@') {
+        if (next) {
+          el.addEventListener(key.slice(1), next);
+        }
+      } else {
+        el.setAttribute(key, next)
+      }
+      break;
+  }
+}
+
+// 创建文本类型 vnode
+function createTextVnode(text) {
+  return {
+    flag: vnodeType.TEXT,
+    tag: null,
+    data: null,
+    children: text,
+    childrenFlag: childType.EMPTY,
+    el: null,
+  };
+}
+</code></pre>
+<p>至此，虚拟 <code>DOM</code> 已经首次渲染到页面上了。</p>
+<p>然后我们再来看看如何简单实现 <code>DOM diff</code>。</p>
+<h1 id="patch"><a class="header" href="#patch">patch</a></h1>
+<p>假设我们要将</p>
+<pre><code class="language-js">let vnode = createElement('div', { id: 'app' }, [
+  createElement('p', { key: 'a', style: { color: 'blue' } }, '节点1'),
+  createElement('p', { key: 'b', '@click': () =&gt; alert('xxx') }, '节点2'),
+  createElement('p', { key: 'c', 'class': 'item-header' }, '节点3'),
+  createElement('p', { key: 'd' }, '节点4'),
+]);
+</code></pre>
+<p>里渲染的 <code>DOM</code> ，变更为如下的 <code>DOM</code> 结构，然后在一秒后重新渲染：</p>
+<pre><code class="language-js">let vnode1 = createElement(&quot;div&quot;, { id: &quot;app&quot; }, [
+  createElement(&quot;p&quot;, { key: 'd' }, &quot;节点4&quot;),
+  createElement(&quot;p&quot;, { key: 'a', style: { color: 'blue' } }, &quot;节点1&quot;),
+  createElement(&quot;p&quot;, { key: 'b', }, &quot;节点2&quot;),
+  createElement(&quot;p&quot;, { key: 'e' }, &quot;节点5&quot;),
+  createElement(&quot;p&quot;, { key: 'f', style: { color: '#eee' } }, &quot;节点4&quot;),
+]);
+
+setTimeout(() =&gt; {
+  render(vnode1, document.getElementById('app'))
+})
+</code></pre>
+<p>然后我们需要在 <code>render</code> 函数里区分首次渲染和再次渲染：</p>
+<pre><code class="language-js">//渲染
+function render(vnode, container) {
+  // 区分首次渲染和再次渲染
+  // 首次渲染直接mount，再次渲染需要diff
+  if (container.vnode) {
+    // 更新
+    patch(container.vnode, vnode, container);
+  } else {
+    mount(vnode, container);
+  }
+
+  container.vnode = vnode;
+}
+</code></pre>
+<p>然后我们看一下 <code>patch</code> 函数：</p>
+<pre><code class="language-js">function patch(pre, next, container) {
+  let nextFlag = next.flag;
+  let preFlag = pre.flag;
+
+  // 如果flag不同直接替换。
+  if (nextFlag !== preFlag) {
+    // 直接替换
+    repaceVnode(pre, next, container);
+  } else if (nextFlag == vnodeType.HTML) {
+    patchElement(pre, next, container);
+  } else if (nextFlag == vnodeType.TEXT) {
+    // 文本节点只需要更新文字内容即可
+    patchText(pre, next);
+  }
+}
+
+// 替换节点，先移除再mount
+function replaceVnode(pre, next) {
+  container.removeChild(pre.el);
+  mount(next, container);
+}
+
+// 文本节点直接替换文字即可
+function patchText(pre, next) {
+  let el = (next.el = pre.el);
+  if (next.children !== pre.children) {
+    el.nodeValue = next.children;
+  }
+}
+</code></pre>
+<p>以上两种最简单的对比都是比较好理解的。接下来来看一下 <code>flag</code> 不同的 <code>HTML</code> 节点的替换 <code>patchElement</code> 。</p>
+<pre><code class="language-js">function patchElement(pre, next, container) {
+  // 如果tag不同就直接替换掉
+  if (pre.tag !== next.tag) {
+    repaceVnode(pre, next, container);
+    return;
+  }
+
+  // 更新一下 el， 然后更新data
+  let el = (next.el = pre.el);
+  let preData = pre.data;
+  let nextData = next.data;
+  // 如果有新值，则全部更新到el上
+  if (nextData) {
+    for (let key in nextData) {
+      let preVal = preData[key];
+      let nextVal = nextData[key];
+      patchData(el, key, preVal, nextVal);
+    }
+  }
+  // 对旧值进行处理，
+  // 旧的有，新的没有，就要置为空
+  // 旧的有，新的有的已经在上面一个循环里被覆盖掉了。
+  if (preData) {
+    for (let key in preData) {
+      let preVal = preData[key];
+      if (preVal &amp;&amp; !nextData.hasOwnProperty(key)) {
+        patchData(el, key, preVal, null);
+      }
+    }
+  }
+
+  // data更新完毕 下面更新子元素
+  patchChildren(
+    pre.childrenFlag,
+    next.childrenFlag,
+    pre.children,
+    next.children,
+    el
+  );
+}
+
+// 更新子元素的方法
+function patchChildren(
+  preChildFlag,
+  nextChildFlag,
+  preChildren,
+  nextChildren,
+  container
+) {
+  // 新老元素都有三种情况，用switch case做嵌套处理
+  // 更新子元素
+  // 老的是 1 ， 0， n
+  // 新的是 1， 0 ， n
+  switch (preChildFlag) {
+    // 老的是一个
+    case childType.SINGLE:
+      switch (nextChildFlag) {
+        // 新的也是一个，直接patch
+        case childType.SINGLE:
+          patch(preChildren, nextChildren, container)
+          break;
+        // 新的是空的，直接移除老的
+        case childType.EMPTY:
+          container.removeChild(preChildren.el)
+          break;
+        // 新的是多个的，先移除老的，再循环mount新的
+        case childType.MULTIPLE:
+          container.removeChild(preChildren.el)
+          for (let i = 0; i &lt; nextChildren.length; i++) {
+            mount(nextChildren[i], container)
+          }
+          break;
+      }
+      break;
+    // 老的是空的
+    case childType.EMPTY:
+      switch (nextChildFlag) {
+        // 新的是一个，直接mount
+        case childType.SINGLE:
+          mount(nextChildren, container)
+          break;
+        // 新的也是空的，不做处理
+        case childType.EMPTY:
+          break;
+        // 新的是多个，直接循环mount新的
+        case childType.MULTIPLE:
+          for (let i = 0; i &lt; nextChildren.length; i++) {
+            mount(nextChildren[i], container)
+          }
+          break;
+      }
+      break;
+    // 老的是多个
+    case childType.MULTIPLE:
+      switch (nextChildFlag) {
+        // 新的是一个，循环移除老的，再把新的mount上去
+        case childType.SINGLE:
+          for (let i = 0; i &lt; preChildren.length; i++) {
+            container.removeChild(preChildren[i]);
+          }
+          mount(nextChildren, container)
+          break;
+        // 新的是空的，循环移除老的，接下来无操作
+        case childType.EMPTY:
+          for (let i = 0; i &lt; preChildren.length; i++) {
+            container.removeChild(preChildren[i]);
+          }
+          break;
+        // 新的是多个的情况，比较复杂，React和Vue的实现不同。这里简单实现一下。
+        // 这个算法网上都有讲解，就不赘述了。
+        default:
+          let lastIndex = 0
+          for (let i = 0; i &lt; nextChildren.length; i++) {
+            const nextVNode = nextChildren[i]
+            let j = 0,
+              find = false
+            for (j; j &lt; preChildren.length; j++) {
+              const prevVNode = preChildren[j]
+              if (nextVNode.key === prevVNode.key) {
+                find = true
+                patch(prevVNode, nextVNode, container)
+                if (j &lt; lastIndex) {
+                  // 需要移动
+                  const refNode = nextChildren[i - 1].el.nextSibling
+                  container.insertBefore(prevVNode.el, refNode)
+                  break
+                } else {
+                  // 更新 lastIndex
+                  lastIndex = j
+                }
+              }
+            }
+            if (!find) {
+              // 挂载新节点
+              const refNode =
+                i - 1 &lt; 0
+                  ? preChildren[0].el
+                  : nextChildren[i - 1].el.nextSibling
+
+              mount(nextVNode, container, refNode)
+            }
+          }
+          // 移除已经不存在的节点
+          for (let i = 0; i &lt; preChildren.length; i++) {
+            const prevVNode = preChildren[i]
+            const has = nextChildren.find(
+              nextVNode =&gt; nextVNode.key === prevVNode.key
+            )
+            if (!has) {
+              // 移除
+              container.removeChild(prevVNode.el)
+            }
+          }
+          break;
+      }
+      break;
+  }
+}
+</code></pre>
+<p>至此，一次 <code>DOM</code> 更新就实现了。</p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                        
+                        
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                
+                            </nav>
+
+        </div>
+
+                <!-- Livereload script (if served using the cli tool) -->
+        <script type="text/javascript">
+            var socket = new WebSocket("ws://0.0.0.0:3000/__livereload");
+            socket.onmessage = function (event) {
+                if (event.data === "reload") {
+                    socket.close();
+                    location.reload();
+                }
+            };
+
+            window.onbeforeunload = function() {
+                socket.close();
+            }
+        </script>
+        
+        
+        
+                <script type="text/javascript">
+            window.playground_copyable = true;
+        </script>
+        
+        
+                <script src="elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="searcher.js" type="text/javascript" charset="utf-8"></script>
+        
+        <script src="clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+        
+                        <script type="text/javascript">
+        window.addEventListener('load', function() {
+            MathJax.Hub.Register.StartupHook('End', function() {
+                window.setTimeout(window.print, 100);
+            });
+        });
+        </script>
+                
+    </body>
+</html>
