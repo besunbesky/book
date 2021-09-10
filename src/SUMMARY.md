@@ -35,6 +35,9 @@
 # Vue
 
 - [Vue]()
+  - [Vue2.x 响应式原理简单解析](./Vue/Vue2.x响应式原理简单解析.md)
+  - [异步更新队列](./Vue/异步更新队列.md)
+  - [computed,watch,watchEffect](./Vue/computed,watch,watchEffect.md)
 - [Vuex]()
   - [Vuex简单源码](./Vue/Vuex简单源码.md)
 
