@@ -84,7 +84,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded affix "><a href="index.html">概述</a></li><li class="spacer"></li><li class="chapter-item expanded affix "><li class="part-title">JavaScript</li><li class="chapter-item expanded "><div><strong aria-hidden="true">1.</strong> 基础</div></li><li><ol class="section"><li class="chapter-item expanded "><a href="JavaScript/作用域和闭包.html"><strong aria-hidden="true">1.1.</strong> 作用域和闭包</a></li><li class="chapter-item expanded "><a href="JavaScript/JS变量.html"><strong aria-hidden="true">1.2.</strong> JS变量</a></li></ol></li><li class="chapter-item expanded "><div><strong aria-hidden="true">2.</strong> 进阶</div></li><li><ol class="section"><li class="chapter-item expanded "><a href="JavaScript/函数相关（compose，pip，memoize，curry，偏函数）.html"><strong aria-hidden="true">2.1.</strong> 函数相关（compose，pip，memoize，curry，偏函数）</a></li></ol></li><li class="chapter-item expanded "><li class="part-title">React</li><li class="chapter-item expanded "><div><strong aria-hidden="true">3.</strong> 虚拟DOM</div></li><li><ol class="section"><li class="chapter-item expanded "><a href="React/虚拟DOM.html"><strong aria-hidden="true">3.1.</strong> 虚拟DOM</a></li><li class="chapter-item expanded "><a href="React/手动实现一个虚拟DOM.html"><strong aria-hidden="true">3.2.</strong> 手动实现一个虚拟DOM</a></li></ol></li><li class="chapter-item expanded "><div><strong aria-hidden="true">4.</strong> React事件</div></li><li><ol class="section"><li class="chapter-item expanded "><a href="React/React事件简单记录.html"><strong aria-hidden="true">4.1.</strong> 简单记录</a></li></ol></li><li class="chapter-item expanded "><li class="part-title">网络</li><li class="chapter-item expanded "><div><strong aria-hidden="true">5.</strong> 网络基础</div></li><li class="chapter-item expanded "><div><strong aria-hidden="true">6.</strong> 扩展阅读</div></li><li><ol class="section"><li class="chapter-item expanded "><a href="Network/HTTP2.0_&_HTTP3.0.html"><strong aria-hidden="true">6.1.</strong> HTTP2.0 &amp; HTTP3.0</a></li><li class="spacer"></li></ol></li></ol>            </div>
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="index.html">概述</a></li><li class="spacer"></li><li class="chapter-item expanded affix "><li class="part-title">JavaScript</li><li class="chapter-item expanded "><div><strong aria-hidden="true">1.</strong> 基础</div></li><li><ol class="section"><li class="chapter-item expanded "><a href="JavaScript/作用域和闭包.html"><strong aria-hidden="true">1.1.</strong> 作用域和闭包</a></li><li class="chapter-item expanded "><a href="JavaScript/JS变量.html"><strong aria-hidden="true">1.2.</strong> JS变量</a></li><li class="chapter-item expanded "><a href="JavaScript/防抖和节流.html"><strong aria-hidden="true">1.3.</strong> 防抖和节流</a></li></ol></li><li class="chapter-item expanded "><div><strong aria-hidden="true">2.</strong> 进阶</div></li><li><ol class="section"><li class="chapter-item expanded "><a href="JavaScript/函数相关（compose，pip，memoize，curry，偏函数）.html"><strong aria-hidden="true">2.1.</strong> 函数相关（compose，pip，memoize，curry，偏函数）</a></li></ol></li><li class="chapter-item expanded "><li class="part-title">React</li><li class="chapter-item expanded "><div><strong aria-hidden="true">3.</strong> 虚拟DOM</div></li><li><ol class="section"><li class="chapter-item expanded "><a href="React/虚拟DOM.html"><strong aria-hidden="true">3.1.</strong> 虚拟DOM</a></li><li class="chapter-item expanded "><a href="React/手动实现一个虚拟DOM.html"><strong aria-hidden="true">3.2.</strong> 手动实现一个虚拟DOM</a></li></ol></li><li class="chapter-item expanded "><div><strong aria-hidden="true">4.</strong> React事件</div></li><li><ol class="section"><li class="chapter-item expanded "><a href="React/React事件简单记录.html"><strong aria-hidden="true">4.1.</strong> 简单记录</a></li></ol></li><li class="chapter-item expanded "><li class="part-title">网络</li><li class="chapter-item expanded "><div><strong aria-hidden="true">5.</strong> 网络基础</div></li><li class="chapter-item expanded "><div><strong aria-hidden="true">6.</strong> 扩展阅读</div></li><li><ol class="section"><li class="chapter-item expanded "><a href="Network/HTTP2.0_&_HTTP3.0.html"><strong aria-hidden="true">6.1.</strong> HTTP2.0 &amp; HTTP3.0</a></li><li class="spacer"></li></ol></li></ol>            </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
 
@@ -273,6 +273,52 @@ To（闲置状态），分配对象的时候先在from空间中进行分配，�
 <p><img src="JavaScript/./images/JS%E5%8F%98%E9%87%8F%E5%A4%8D%E4%B9%A0-image-20210718135354266.png" alt="image-20210718135354266" /></p>
 <p><img src="JavaScript/./images/JS%E5%8F%98%E9%87%8F%E5%A4%8D%E4%B9%A0-image-20210718135544734.png" alt="image-20210718135544734" /></p>
 <p><img src="JavaScript/./images/JS%E5%8F%98%E9%87%8F%E5%A4%8D%E4%B9%A0-image-20210718135613363.png" alt="image-20210718135613363" /></p>
+<div style="break-before: page; page-break-before: always;"></div><pre><code class="language-js">// 防抖。当持续触发事件时，一定时间段内没有再触发事件，事件处理函数才会执行一次，如果设定的时间到来之前，又一次触发了事件，就重新开始延时。
+let deBounce = (fn, delay) =&gt; {
+  let timer = null;
+  return function (...args) {
+    if (timer) {
+      clearTimeout(timer);
+    }
+    timer = setTimeout(() =&gt; {
+      fn(...args);
+    }, delay)
+  }
+}
+
+// 节流。当持续触发事件时，保证一定时间段内只调用一次事件处理函数。
+let throttle = (fn, delay) =&gt; {
+  let flag = true;
+  return function (...args) {
+    if (!flag) return;
+    flag = false;
+    setTimeout(() =&gt; {
+      fn(...args)
+      flag = true;
+    }, delay)
+  }
+}
+
+let deBounce2 = (fn, delay) =&gt; {
+  let start = Date.now();
+  return function (...args) {
+    if (Date.now() - start &gt; delay) {
+      fn(...args);
+    }
+    start = Date.now();
+  }
+}
+
+let throttle2 = (fn, delay) =&gt; {
+  let start = Date.now();
+  return function (...args) {
+    if (Date.now() - start &gt; delay) {
+      fn(...args);
+      start = Date.now();
+    }
+  }
+}
+</code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="函数相关"><a class="header" href="#函数相关">函数相关</a></h1>
 <h2 id="compose函数和pipe函数"><a class="header" href="#compose函数和pipe函数">compose函数和pipe函数</a></h2>
 <p>函数组合，将多个函数组合在一起。</p>
@@ -1245,6 +1291,20 @@ blocking）会导致在达到最大请求时，资源需要等待其他资源请
 
         </div>
 
+                <!-- Livereload script (if served using the cli tool) -->
+        <script type="text/javascript">
+            var socket = new WebSocket("ws://0.0.0.0:3000/__livereload");
+            socket.onmessage = function (event) {
+                if (event.data === "reload") {
+                    socket.close();
+                    location.reload();
+                }
+            };
+
+            window.onbeforeunload = function() {
+                socket.close();
+            }
+        </script>
         
         
         
