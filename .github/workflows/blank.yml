@@ -28,28 +28,23 @@ jobs:
         run: |
           make build
           git add -f docs
+          git config --global user.email "185699189@qq.com"
+          git config --global user.name "zhuyue"
+          git commit -m "auto deploy"
 
-      - name: Github commit and push
+      - name: GitHub Push
         # You may pin to the exact commit or the version.
-        # uses: Smart-Transportation/push@c77535fe7a94645f7ceca83e48e6cc977620710e
-        uses: Smart-Transportation/push@v1.3
+        # uses: ad-m/github-push-action@40bf560936a8022e68a3c00e7d2abefaf01305a6
+        uses: ad-m/github-push-action@v0.6.0
         with:
           # Token for the repo. Can be passed in using $\{{ secrets.GITHUB_TOKEN }}
           github_token: $\{{ secrets.GITHUB_TOKEN }}
-          # Email used to configure user.email in `git config`.
-          author_email: 185699189@qq.com
-          # Name used to configure user.name in `git config`.
-          author_name: zhuyue
-          # Commit message.
-          message: auto deploy
           # Repository name to push. Default or empty value represents current github repository (${GITHUB_REPOSITORY})
           repository: # optional, default is
           # Destination branch to push changes
           branch: # optional, default is master
-          # Allow empty commit
-          empty: # optional
           # Determines if force push is used
-          force: # optional
+          force: true
           # Determines if --tags is used
           tags: # optional
           # Directory to change to before pushing.
