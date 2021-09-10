@@ -13,6 +13,7 @@
 
 - [进阶]()
   - [函数相关（compose，pip，memoize，curry，偏函数）](./JavaScript/函数相关（compose，pip，memoize，curry，偏函数）.md)
+  - [过滤重复请求 - 时间窗口](./JavaScript/过滤重复请求-时间窗口.md)
 
 # CSS
 
