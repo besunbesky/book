@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>简单记录 - Rainning in the utopia</title>
+        <title>过滤重复请求 - 时间窗口 - Rainning in the utopia</title>
                 
 
         <!-- Custom HTML head -->
@@ -83,7 +83,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded affix "><a href="../index.html">概述</a></li><li class="spacer"></li><li class="chapter-item expanded affix "><li class="part-title">JavaScript</li><li class="chapter-item expanded "><div><strong aria-hidden="true">1.</strong> 基础</div></li><li><ol class="section"><li class="chapter-item expanded "><a href="../JavaScript/作用域和闭包.html"><strong aria-hidden="true">1.1.</strong> 作用域和闭包</a></li><li class="chapter-item expanded "><a href="../JavaScript/JS变量.html"><strong aria-hidden="true">1.2.</strong> JS变量</a></li><li class="chapter-item expanded "><a href="../JavaScript/防抖和节流.html"><strong aria-hidden="true">1.3.</strong> 防抖和节流</a></li></ol></li><li class="chapter-item expanded "><div><strong aria-hidden="true">2.</strong> 进阶</div></li><li><ol class="section"><li class="chapter-item expanded "><a href="../JavaScript/函数相关（compose，pip，memoize，curry，偏函数）.html"><strong aria-hidden="true">2.1.</strong> 函数相关（compose，pip，memoize，curry，偏函数）</a></li><li class="chapter-item expanded "><a href="../JavaScript/过滤重复请求-时间窗口.html"><strong aria-hidden="true">2.2.</strong> 过滤重复请求 - 时间窗口</a></li></ol></li><li class="chapter-item expanded "><li class="part-title">CSS</li><li class="chapter-item expanded "><div><strong aria-hidden="true">3.</strong> 基础</div></li><li><ol class="section"><li class="chapter-item expanded "><a href="../CSS/居中布局.html"><strong aria-hidden="true">3.1.</strong> 居中布局的几种方式</a></li></ol></li><li class="chapter-item expanded "><li class="part-title">React</li><li class="chapter-item expanded "><div><strong aria-hidden="true">4.</strong> 虚拟DOM</div></li><li><ol class="section"><li class="chapter-item expanded "><a href="../React/虚拟DOM.html"><strong aria-hidden="true">4.1.</strong> 虚拟DOM</a></li><li class="chapter-item expanded "><a href="../React/手动实现一个虚拟DOM.html"><strong aria-hidden="true">4.2.</strong> 手动实现一个虚拟DOM</a></li></ol></li><li class="chapter-item expanded "><div><strong aria-hidden="true">5.</strong> React事件</div></li><li><ol class="section"><li class="chapter-item expanded "><a href="../React/React事件简单记录.html" class="active"><strong aria-hidden="true">5.1.</strong> 简单记录</a></li><li class="chapter-item expanded "><a href="../React/React事件机制.html"><strong aria-hidden="true">5.2.</strong> React事件机制源码简单分析</a></li></ol></li><li class="chapter-item expanded "><div><strong aria-hidden="true">6.</strong> Hooks</div></li><li><ol class="section"><li class="chapter-item expanded "><a href="../React/ReactHooks详解.html"><strong aria-hidden="true">6.1.</strong> React Hooks 详解</a></li></ol></li><li class="chapter-item expanded "><li class="part-title">Vue</li><li class="chapter-item expanded "><div><strong aria-hidden="true">7.</strong> Vue</div></li><li><ol class="section"><li class="chapter-item expanded "><a href="../Vue/Vue2.x响应式原理简单解析.html"><strong aria-hidden="true">7.1.</strong> Vue2.x 响应式原理简单解析</a></li><li class="chapter-item expanded "><a href="../Vue/异步更新队列.html"><strong aria-hidden="true">7.2.</strong> 异步更新队列</a></li><li class="chapter-item expanded "><a href="../Vue/computed,watch,watchEffect.html"><strong aria-hidden="true">7.3.</strong> computed,watch,watchEffect</a></li></ol></li><li class="chapter-item expanded "><div><strong aria-hidden="true">8.</strong> Vuex</div></li><li><ol class="section"><li class="chapter-item expanded "><a href="../Vue/Vuex简单源码.html"><strong aria-hidden="true">8.1.</strong> Vuex简单源码</a></li></ol></li><li class="chapter-item expanded "><li class="part-title">网络</li><li class="chapter-item expanded "><div><strong aria-hidden="true">9.</strong> 网络基础</div></li><li class="chapter-item expanded "><div><strong aria-hidden="true">10.</strong> 扩展阅读</div></li><li><ol class="section"><li class="chapter-item expanded "><a href="../Network/HTTP2.0_&_HTTP3.0.html"><strong aria-hidden="true">10.1.</strong> HTTP2.0 &amp; HTTP3.0</a></li><li class="spacer"></li></ol></li></ol>            </div>
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="../index.html">概述</a></li><li class="spacer"></li><li class="chapter-item expanded affix "><li class="part-title">JavaScript</li><li class="chapter-item expanded "><div><strong aria-hidden="true">1.</strong> 基础</div></li><li><ol class="section"><li class="chapter-item expanded "><a href="../JavaScript/作用域和闭包.html"><strong aria-hidden="true">1.1.</strong> 作用域和闭包</a></li><li class="chapter-item expanded "><a href="../JavaScript/JS变量.html"><strong aria-hidden="true">1.2.</strong> JS变量</a></li><li class="chapter-item expanded "><a href="../JavaScript/防抖和节流.html"><strong aria-hidden="true">1.3.</strong> 防抖和节流</a></li></ol></li><li class="chapter-item expanded "><div><strong aria-hidden="true">2.</strong> 进阶</div></li><li><ol class="section"><li class="chapter-item expanded "><a href="../JavaScript/函数相关（compose，pip，memoize，curry，偏函数）.html"><strong aria-hidden="true">2.1.</strong> 函数相关（compose，pip，memoize，curry，偏函数）</a></li><li class="chapter-item expanded "><a href="../JavaScript/过滤重复请求-时间窗口.html" class="active"><strong aria-hidden="true">2.2.</strong> 过滤重复请求 - 时间窗口</a></li></ol></li><li class="chapter-item expanded "><li class="part-title">CSS</li><li class="chapter-item expanded "><div><strong aria-hidden="true">3.</strong> 基础</div></li><li><ol class="section"><li class="chapter-item expanded "><a href="../CSS/居中布局.html"><strong aria-hidden="true">3.1.</strong> 居中布局的几种方式</a></li></ol></li><li class="chapter-item expanded "><li class="part-title">React</li><li class="chapter-item expanded "><div><strong aria-hidden="true">4.</strong> 虚拟DOM</div></li><li><ol class="section"><li class="chapter-item expanded "><a href="../React/虚拟DOM.html"><strong aria-hidden="true">4.1.</strong> 虚拟DOM</a></li><li class="chapter-item expanded "><a href="../React/手动实现一个虚拟DOM.html"><strong aria-hidden="true">4.2.</strong> 手动实现一个虚拟DOM</a></li></ol></li><li class="chapter-item expanded "><div><strong aria-hidden="true">5.</strong> React事件</div></li><li><ol class="section"><li class="chapter-item expanded "><a href="../React/React事件简单记录.html"><strong aria-hidden="true">5.1.</strong> 简单记录</a></li><li class="chapter-item expanded "><a href="../React/React事件机制.html"><strong aria-hidden="true">5.2.</strong> React事件机制源码简单分析</a></li></ol></li><li class="chapter-item expanded "><div><strong aria-hidden="true">6.</strong> Hooks</div></li><li><ol class="section"><li class="chapter-item expanded "><a href="../React/ReactHooks详解.html"><strong aria-hidden="true">6.1.</strong> React Hooks 详解</a></li></ol></li><li class="chapter-item expanded "><li class="part-title">Vue</li><li class="chapter-item expanded "><div><strong aria-hidden="true">7.</strong> Vue</div></li><li><ol class="section"><li class="chapter-item expanded "><a href="../Vue/Vue2.x响应式原理简单解析.html"><strong aria-hidden="true">7.1.</strong> Vue2.x 响应式原理简单解析</a></li><li class="chapter-item expanded "><a href="../Vue/异步更新队列.html"><strong aria-hidden="true">7.2.</strong> 异步更新队列</a></li><li class="chapter-item expanded "><a href="../Vue/computed,watch,watchEffect.html"><strong aria-hidden="true">7.3.</strong> computed,watch,watchEffect</a></li></ol></li><li class="chapter-item expanded "><div><strong aria-hidden="true">8.</strong> Vuex</div></li><li><ol class="section"><li class="chapter-item expanded "><a href="../Vue/Vuex简单源码.html"><strong aria-hidden="true">8.1.</strong> Vuex简单源码</a></li></ol></li><li class="chapter-item expanded "><li class="part-title">网络</li><li class="chapter-item expanded "><div><strong aria-hidden="true">9.</strong> 网络基础</div></li><li class="chapter-item expanded "><div><strong aria-hidden="true">10.</strong> 扩展阅读</div></li><li><ol class="section"><li class="chapter-item expanded "><a href="../Network/HTTP2.0_&_HTTP3.0.html"><strong aria-hidden="true">10.1.</strong> HTTP2.0 &amp; HTTP3.0</a></li><li class="spacer"></li></ol></li></ol>            </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
 
@@ -144,37 +144,95 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1 id="react事件机制"><a class="header" href="#react事件机制">React事件机制</a></h1>
-<h2 id="dom事件"><a class="header" href="#dom事件">DOM事件</a></h2>
-<p>冒泡和捕获</p>
-<p><img src="./images/image-20210624173959717.png" alt="image-20210624173959717" /></p>
-<p>先从父元素向下传递捕获，直到子元素处理掉，然后再逐个冒泡。</p>
-<p>所以有了一个事件委托的机制。</p>
-<h2 id="react事件"><a class="header" href="#react事件">React事件</a></h2>
-<p>React会将所有事件都绑定在document上。</p>
-<p>统一使用事件监听。都是在冒泡阶段处理。</p>
-<p>所以一般在组件挂载的时候增加监听事件。</p>
-<p>组件卸载的时候删除监听事件。</p>
-<p>事件触发的时候，组件会生成一个合成事件。然后发送到document上。</p>
-<p>document会通过dispatch event回调函数依次执行dispatch listener中同类型事件的监听函数。</p>
-<p>事件注册是在组件生成的时候，将VDOM中的所有的事件对应的原生事件都注册在Document中一个监听器中。所有的事件处理函数都存放在listenerbank中，并以key做为索引。（将可能要触发的事件分门别类）</p>
-<ol>
-<li>是合成事件，不是DOM原生事件</li>
-<li>在document监听所有支持事件</li>
-<li>使用统一的分发函数dispatchEvent来指定事件函数的执行</li>
-</ol>
-<p><a href="https://juejin.cn/post/6844903502729183239">拓展阅读1</a></p>
-<p><a href="http://zhenhua-lee.github.io/react/react-event.html">拓展阅读2</a></p>
+                        <h1 id="时间窗口"><a class="header" href="#时间窗口">时间窗口</a></h1>
+<p>在一定时间内，如果请求同一个url，则只请求一次。</p>
+<pre><code class="language-javascript">const fetch = require(&quot;node-fetch&quot;);
+
+function hash(...args) {
+  return args.join(&quot;,&quot;);
+}
+
+function window_request(f, time = 50) {
+  let w = {};
+  // 是否有时间窗口
+  let flag = false;
+
+  return (...args) =&gt; {
+    return new Promise((resolve) =&gt; {
+      // 如果w中没有这次请求（通过hash存入）, 如果有，则在最后 L54 将resolve存入到对应的resolvers里
+      if (!w[hash(args)]) {
+        w[hash(args)] = {
+          func: f,
+          args,
+          // 将不同的request的resolve也添加进来，方便最后统一做处理。
+          resolvers: [],
+        };
+      }
+
+      // 如果没有时间窗口
+      if (!flag) {
+        // 接下来是创建一个时间窗口
+        console.log('create a window')
+        flag = true;
+        setTimeout(() =&gt; {
+          // 对w中每一个请求进行处理。
+          Object.keys(w).forEach((key) =&gt; {
+            // 获取参数进行执行
+            const { func, args, resolvers } = w[key];
+            console.log(&quot;run once ---- &quot;, resolvers.length);
+            func(...args)
+              .then((res) =&gt; {
+                return res.text();
+              })
+              .then((t) =&gt; {
+                // 将获取到的结果批量放到resolve中处理
+                resolvers.forEach((r) =&gt; {
+                  console.log(&quot;result anywhere&quot;);
+                  r(t);
+                });
+                // 重置访问窗口
+                flag = false;
+                w = {};
+              });
+          });
+        }, time);
+      }
+
+      w[hash(args)].resolvers.push(resolve);
+    });
+  };
+}
+
+const request = window_request(fetch, 20);
+
+request(&quot;https://www.baidu.com&quot;);
+request(&quot;https://www.baidu.com&quot;);
+request(&quot;https://www.baidu.com&quot;);
+request(&quot;https://www.baidu.com&quot;);
+request(&quot;https://www.baidu.com&quot;);
+request(&quot;https://www.baidu.com&quot;);
+request(&quot;https://www.baidu.com&quot;);
+console.log('break')
+setTimeout(() =&gt; {
+  request(&quot;https://www.baidu.com&quot;);
+  request(&quot;https://www.baidu.com&quot;);
+  request(&quot;https://www.baidu.com&quot;);
+  request(&quot;https://www.baidu.com&quot;);
+  request(&quot;https://www.baidu.com&quot;);
+  request(&quot;https://www.baidu.com&quot;);
+  request(&quot;https://www.baidu.com&quot;);
+}, 10000);
+</code></pre>
 
                     </main>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
-                                                    <a rel="prev" href="../React/手动实现一个虚拟DOM.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                                    <a rel="prev" href="../JavaScript/函数相关（compose，pip，memoize，curry，偏函数）.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                                 <i class="fa fa-angle-left"></i>
                             </a>
                         
-                                                    <a rel="next" href="../React/React事件机制.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                                    <a rel="next" href="../CSS/居中布局.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                                 <i class="fa fa-angle-right"></i>
                             </a>
                         
@@ -184,11 +242,11 @@
             </div>
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
-                                    <a rel="prev" href="../React/手动实现一个虚拟DOM.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                    <a rel="prev" href="../JavaScript/函数相关（compose，pip，memoize，curry，偏函数）.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                         <i class="fa fa-angle-left"></i>
                     </a>
                 
-                                    <a rel="next" href="../React/React事件机制.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                    <a rel="next" href="../CSS/居中布局.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                         <i class="fa fa-angle-right"></i>
                     </a>
                             </nav>
