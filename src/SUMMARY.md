@@ -8,6 +8,7 @@
 
 - [函数相关（compose，pip，memoize，curry，偏函数）](./JavaScript/函数相关（compose，pip，memoize，curry，偏函数）.md)
 - [作用域和闭包](./JavaScript/作用域和闭包.md)
+- [JS变量](./JavaScript/JS变量.md)
 
 # React
 
