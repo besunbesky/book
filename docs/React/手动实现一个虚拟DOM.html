@@ -1,0 +1,732 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN" class="sidebar-visible no-js light">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>手动实现一个虚拟DOM - Rainning in the utopia</title>
+                
+
+        <!-- Custom HTML head -->
+        
+
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+                <link rel="icon" href="../favicon.svg">
+                        <link rel="shortcut icon" href="../favicon.png">
+                <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+                <link rel="stylesheet" href="../css/print.css" media="print">
+        
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../highlight.css">
+        <link rel="stylesheet" href="../tomorrow-night.css">
+        <link rel="stylesheet" href="../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        
+                <!-- MathJax -->
+        <script async type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+            </head>
+    <body>
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="../index.html">概述</a></li><li class="spacer"></li><li class="chapter-item expanded affix "><li class="part-title">JavaScript</li><li class="chapter-item expanded "><div><strong aria-hidden="true">1.</strong> 基础</div></li><li><ol class="section"><li class="chapter-item expanded "><a href="../JavaScript/作用域和闭包.html"><strong aria-hidden="true">1.1.</strong> 作用域和闭包</a></li><li class="chapter-item expanded "><a href="../JavaScript/JS变量.html"><strong aria-hidden="true">1.2.</strong> JS变量</a></li></ol></li><li class="chapter-item expanded "><div><strong aria-hidden="true">2.</strong> 进阶</div></li><li><ol class="section"><li class="chapter-item expanded "><a href="../JavaScript/函数相关（compose，pip，memoize，curry，偏函数）.html"><strong aria-hidden="true">2.1.</strong> 函数相关（compose，pip，memoize，curry，偏函数）</a></li></ol></li><li class="chapter-item expanded "><li class="part-title">React</li><li class="chapter-item expanded "><div><strong aria-hidden="true">3.</strong> 虚拟DOM</div></li><li><ol class="section"><li class="chapter-item expanded "><a href="../React/虚拟DOM.html"><strong aria-hidden="true">3.1.</strong> 虚拟DOM</a></li><li class="chapter-item expanded "><a href="../React/手动实现一个虚拟DOM.html" class="active"><strong aria-hidden="true">3.2.</strong> 手动实现一个虚拟DOM</a></li></ol></li><li class="chapter-item expanded "><div><strong aria-hidden="true">4.</strong> React事件</div></li><li><ol class="section"><li class="chapter-item expanded "><a href="../React/React事件简单记录.html"><strong aria-hidden="true">4.1.</strong> 简单记录</a></li></ol></li><li class="chapter-item expanded "><li class="part-title">网络</li><li class="chapter-item expanded "><div><strong aria-hidden="true">5.</strong> 网络基础</div></li><li class="chapter-item expanded "><div><strong aria-hidden="true">6.</strong> 扩展阅读</div></li><li><ol class="section"><li class="chapter-item expanded "><a href="../Network/HTTP2.0_&_HTTP3.0.html"><strong aria-hidden="true">6.1.</strong> HTTP2.0 &amp; HTTP3.0</a></li><li class="spacer"></li></ol></li></ol>            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                                                <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                                            </div>
+
+                    <h1 class="menu-title">Rainning in the utopia</h1>
+
+                    <div class="right-buttons">
+                                                <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                                                                        
+                    </div>
+                </div>
+
+                                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+                
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <p>手动实现一个简单的虚拟 <code>DOM</code> (类似 <code>Vue2.x</code> ， <code>React</code> 中的 <code>Fiber</code> 太过于复杂)</p>
+<h1 id="创建"><a class="header" href="#创建">创建</a></h1>
+<p>我们来尝试简单渲染一个 <code>DOM</code> 结构，</p>
+<pre><code class="language-html">&lt;div id='app'&gt;
+  &lt;p&gt;节点1&lt;/p&gt;
+&lt;/div&gt;
+</code></pre>
+<p>我们有一个最简陋的 <code>createElement</code> 函数来返回一个虚拟 <code>DOM</code></p>
+<pre><code class="language-js">const vnodeType = {
+  HTML: 'HTML',
+  TEXT: 'TEXT',
+
+  COMPONENT: 'COMPONENT',
+  CLASS_COMPONENT: 'CLASS_COMPONENT',
+}
+
+const childType = {
+  EMPTY: 'EMPTY',
+  SINGLE: 'SINGLE',
+  MULTIPLE: 'MULTIPLE',
+}
+
+
+// 新建虚拟DOM
+// 名字，属性，子元素
+function createElement(tag, data, children = null) {
+
+  let flag;
+  if (typeof tag === 'string') {
+    // 普通html标签
+    flag = vnodeType.HTML
+  } else if (typeof tag === 'function') {
+    flag = vnodeType.COMPONENT
+  } else {
+    flag = vnodeType.TEXT
+  }
+
+  // 0， 1， n
+  let childrenFlag;
+  if (children == null) {
+    childrenFlag = childType.EMPTY
+  } else if (Array.isArray(children)) {
+    let length = children.length
+    if (length === 0) {
+      childrenFlag = childType.EMPTY
+    } else {
+      childrenFlag = childType.MULTIPLE
+    }
+  } else {
+    childrenFlag = childType.SINGLE
+    children = createTextVnode(children + '')
+  }
+
+
+  // 返回vnode
+  return {
+    flag, //vnode类型
+    tag, // 标签，div文本没有tag，组件就是函数
+    data,
+    children,
+    childrenFlag
+  }
+}
+
+//渲染
+function render() {
+
+}
+
+// 创建文本类型 vnode
+function createTextVnode(text) {
+  return {
+    flag: vnodeType.TEXT,
+    tag: null,
+    data: null,
+    children: text,
+    childrenFlag: childType.EMPTY
+  }
+}
+</code></pre>
+<p>页面上</p>
+<pre><code class="language-js">let div = createElement('div', { id: 'app' }, [
+    createElement('p', {}, '节点1'),
+  ]);
+console.log(JSON.stringify(div, null, 2))
+</code></pre>
+<p>out</p>
+<pre><code class="language-json">{
+  &quot;flag&quot;: &quot;HTML&quot;,
+  &quot;tag&quot;: &quot;div&quot;,
+  &quot;data&quot;: {
+    &quot;id&quot;: &quot;app&quot;
+  },
+  &quot;children&quot;: [
+    {
+      &quot;flag&quot;: &quot;HTML&quot;,
+      &quot;tag&quot;: &quot;p&quot;,
+      &quot;data&quot;: {},
+      &quot;children&quot;: {
+        &quot;flag&quot;: &quot;TEXT&quot;,
+        &quot;tag&quot;: null,
+        &quot;data&quot;: null,
+        &quot;children&quot;: &quot;节点1&quot;,
+        &quot;childrenFlag&quot;: &quot;EMPTY&quot;
+      },
+      &quot;childrenFlag&quot;: &quot;SINGLE&quot;
+    }
+  ],
+  &quot;childrenFlag&quot;: &quot;MULTIPLE&quot;
+}
+</code></pre>
+<p>接下来我们将它渲染到页面上。</p>
+<h1 id="渲染"><a class="header" href="#渲染">渲染</a></h1>
+<p>我们搞多一些 <code>p</code> 元素在页面上，并且调用 <code>render</code> 函数来渲染。</p>
+<pre><code class="language-html">&lt;html lang=&quot;en&quot;&gt;
+
+&lt;head&gt;
+  &lt;meta charset=&quot;UTF-8&quot; /&gt;
+  &lt;meta http-equiv=&quot;X-UA-Compatible&quot; content=&quot;IE=edge&quot; /&gt;
+  &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot; /&gt;
+  &lt;title&gt;Document&lt;/title&gt;
+  &lt;style&gt;
+    .item-header {
+      font-size: 30px;
+      color: green;
+    }
+  &lt;/style&gt;
+&lt;/head&gt;
+
+&lt;body&gt;
+  &lt;div id='app'&gt;&lt;/div&gt;
+  &lt;script src='./index.js'&gt;&lt;/script&gt;
+  &lt;script&gt;
+    let vnode = createElement('div', { id: 'app' }, [
+      createElement('p', { key: 'a', style: { color: 'blue' } }, '节点1'),
+      createElement('p', { key: 'b', '@click': () =&gt; alert('xxx') }, '节点2'),
+      createElement('p', { key: 'c', 'class': 'item-header' }, '节点3'),
+      createElement('p', { key: 'd' }, '节点4'),
+    ]);
+    render(vnode, document.getElementById('app'))
+    // console.log(JSON.stringify(div, null, 2))
+  &lt;/script&gt;
+&lt;/body&gt;
+
+&lt;/html&gt;
+</code></pre>
+<p>还有一些额外的工作（简易版本），需要注意以下的一些问题。</p>
+<ul>
+<li>属性的处理。</li>
+<li>首次渲染和 <code>diff</code></li>
+<li><code>el</code> 属性</li>
+<li>递归渲染子元素</li>
+</ul>
+<p>简易版的代码如下:</p>
+<pre><code class="language-js">const vnodeType = {
+  HTML: 'HTML',
+  TEXT: 'TEXT',
+
+  COMPONENT: 'COMPONENT',
+  CLASS_COMPONENT: 'CLASS_COMPONENT',
+};
+
+const childType = {
+  // 节点没有子元素或者是空数组
+  EMPTY: 'EMPTY',
+  // 节点是文本元素
+  SINGLE: 'SINGLE',
+  // 节点有1或多个子元素
+  MULTIPLE: 'MULTIPLE',
+};
+
+// 新建虚拟DOM
+// 名字，属性，子元素
+function createElement(tag, data, children = null) {
+  let flag;
+  if (typeof tag === 'string') {
+    // 普通html标签
+    flag = vnodeType.HTML;
+  } else if (typeof tag === 'function') {
+    flag = vnodeType.COMPONENT;
+  } else {
+    flag = vnodeType.TEXT;
+  }
+
+  // 0， 1， n
+  let childrenFlag;
+  if (children == null) {
+    childrenFlag = childType.EMPTY;
+  } else if (Array.isArray(children)) {
+    let length = children.length;
+    if (length === 0) {
+      childrenFlag = childType.EMPTY;
+    } else {
+      childrenFlag = childType.MULTIPLE;
+    }
+  } else {
+    childrenFlag = childType.SINGLE;
+    // 文本元素直接给textVnode节点
+    children = createTextVnode(children + '');
+  }
+
+  // 返回vnode
+  return {
+    flag, //vnode类型
+    tag, // 标签，div文本没有tag，组件就是函数
+    data,
+    children,
+    childrenFlag,
+    el: null,
+  };
+}
+
+//渲染
+function render(vnode, container) {
+  // 区分首次渲染和再次渲染
+  // 首次渲染直接mount，再次渲染需要diff
+  mount(vnode, container);
+}
+
+// 首次挂载元素
+function mount(vnode, container) {
+  let { flag } = vnode;
+  // 区别对待HTML节点和Text节点
+  if (flag === vnodeType.HTML) {
+    mountElement(vnode, container);
+  } else if (flag === vnodeType.TEXT) {
+    mountText(vnode, container);
+  }
+}
+
+function mountElement(vnode, container) {
+  let dom = document.createElement(vnode.tag);
+  // 存一下，以后都能拿到真实dom
+  vnode.el = dom;
+  let { data, children, childrenFlag } = vnode;
+
+  // 挂载data属性
+  if (data) {
+    for (let key in data) {
+      // 节点，名字，老值，新值
+      patchData(dom, key, null, data[key]);
+    }
+  }
+
+  // 根据子元素的不同类型来渲染子元素
+  if (childrenFlag !== childType.EMPTY) {
+    if (childrenFlag === childType.SINGLE) {
+      mount(children, dom);
+    } else if (childrenFlag == childType.MULTIPLE) {
+      for (let i = 0; i &lt; children.length; i++) {
+        mount(children[i], dom);
+      }
+    }
+  }
+
+  // 挂载
+  container.appendChild(dom);
+}
+function mountText(vnode, container) {
+  let dom = document.createTextNode(vnode.children);
+  vnode.el = dom;
+
+  // 挂载
+  container.appendChild(dom);
+}
+
+function patchData(el, key, pre, next) {
+  switch (key) {
+    // 处理style属性
+    case 'style':
+      for (let k in next) {
+        el.style[k] = next[k];
+      }
+      break;
+    // 处理class属性
+    case 'class':
+      el.className = next;
+      break;
+    // 其他
+    default:
+      // 处理事件绑定函数，以vue的@为例
+      if (key[0] === '@') {
+        if (next) {
+          el.addEventListener(key.slice(1), next);
+        }
+      } else {
+        el.setAttribute(key, next)
+      }
+      break;
+  }
+}
+
+// 创建文本类型 vnode
+function createTextVnode(text) {
+  return {
+    flag: vnodeType.TEXT,
+    tag: null,
+    data: null,
+    children: text,
+    childrenFlag: childType.EMPTY,
+    el: null,
+  };
+}
+</code></pre>
+<p>至此，虚拟 <code>DOM</code> 已经首次渲染到页面上了。</p>
+<p>然后我们再来看看如何简单实现 <code>DOM diff</code>。</p>
+<h1 id="patch"><a class="header" href="#patch">patch</a></h1>
+<p>假设我们要将</p>
+<pre><code class="language-js">let vnode = createElement('div', { id: 'app' }, [
+  createElement('p', { key: 'a', style: { color: 'blue' } }, '节点1'),
+  createElement('p', { key: 'b', '@click': () =&gt; alert('xxx') }, '节点2'),
+  createElement('p', { key: 'c', 'class': 'item-header' }, '节点3'),
+  createElement('p', { key: 'd' }, '节点4'),
+]);
+</code></pre>
+<p>里渲染的 <code>DOM</code> ，变更为如下的 <code>DOM</code> 结构，然后在一秒后重新渲染：</p>
+<pre><code class="language-js">let vnode1 = createElement(&quot;div&quot;, { id: &quot;app&quot; }, [
+  createElement(&quot;p&quot;, { key: 'd' }, &quot;节点4&quot;),
+  createElement(&quot;p&quot;, { key: 'a', style: { color: 'blue' } }, &quot;节点1&quot;),
+  createElement(&quot;p&quot;, { key: 'b', }, &quot;节点2&quot;),
+  createElement(&quot;p&quot;, { key: 'e' }, &quot;节点5&quot;),
+  createElement(&quot;p&quot;, { key: 'f', style: { color: '#eee' } }, &quot;节点4&quot;),
+]);
+
+setTimeout(() =&gt; {
+  render(vnode1, document.getElementById('app'))
+})
+</code></pre>
+<p>然后我们需要在 <code>render</code> 函数里区分首次渲染和再次渲染：</p>
+<pre><code class="language-js">//渲染
+function render(vnode, container) {
+  // 区分首次渲染和再次渲染
+  // 首次渲染直接mount，再次渲染需要diff
+  if (container.vnode) {
+    // 更新
+    patch(container.vnode, vnode, container);
+  } else {
+    mount(vnode, container);
+  }
+
+  container.vnode = vnode;
+}
+</code></pre>
+<p>然后我们看一下 <code>patch</code> 函数：</p>
+<pre><code class="language-js">function patch(pre, next, container) {
+  let nextFlag = next.flag;
+  let preFlag = pre.flag;
+
+  // 如果flag不同直接替换。
+  if (nextFlag !== preFlag) {
+    // 直接替换
+    repaceVnode(pre, next, container);
+  } else if (nextFlag == vnodeType.HTML) {
+    patchElement(pre, next, container);
+  } else if (nextFlag == vnodeType.TEXT) {
+    // 文本节点只需要更新文字内容即可
+    patchText(pre, next);
+  }
+}
+
+// 替换节点，先移除再mount
+function replaceVnode(pre, next) {
+  container.removeChild(pre.el);
+  mount(next, container);
+}
+
+// 文本节点直接替换文字即可
+function patchText(pre, next) {
+  let el = (next.el = pre.el);
+  if (next.children !== pre.children) {
+    el.nodeValue = next.children;
+  }
+}
+</code></pre>
+<p>以上两种最简单的对比都是比较好理解的。接下来来看一下 <code>flag</code> 不同的 <code>HTML</code> 节点的替换 <code>patchElement</code> 。</p>
+<pre><code class="language-js">function patchElement(pre, next, container) {
+  // 如果tag不同就直接替换掉
+  if (pre.tag !== next.tag) {
+    repaceVnode(pre, next, container);
+    return;
+  }
+
+  // 更新一下 el， 然后更新data
+  let el = (next.el = pre.el);
+  let preData = pre.data;
+  let nextData = next.data;
+  // 如果有新值，则全部更新到el上
+  if (nextData) {
+    for (let key in nextData) {
+      let preVal = preData[key];
+      let nextVal = nextData[key];
+      patchData(el, key, preVal, nextVal);
+    }
+  }
+  // 对旧值进行处理，
+  // 旧的有，新的没有，就要置为空
+  // 旧的有，新的有的已经在上面一个循环里被覆盖掉了。
+  if (preData) {
+    for (let key in preData) {
+      let preVal = preData[key];
+      if (preVal &amp;&amp; !nextData.hasOwnProperty(key)) {
+        patchData(el, key, preVal, null);
+      }
+    }
+  }
+
+  // data更新完毕 下面更新子元素
+  patchChildren(
+    pre.childrenFlag,
+    next.childrenFlag,
+    pre.children,
+    next.children,
+    el
+  );
+}
+
+// 更新子元素的方法
+function patchChildren(
+  preChildFlag,
+  nextChildFlag,
+  preChildren,
+  nextChildren,
+  container
+) {
+  // 新老元素都有三种情况，用switch case做嵌套处理
+  // 更新子元素
+  // 老的是 1 ， 0， n
+  // 新的是 1， 0 ， n
+  switch (preChildFlag) {
+    // 老的是一个
+    case childType.SINGLE:
+      switch (nextChildFlag) {
+        // 新的也是一个，直接patch
+        case childType.SINGLE:
+          patch(preChildren, nextChildren, container)
+          break;
+        // 新的是空的，直接移除老的
+        case childType.EMPTY:
+          container.removeChild(preChildren.el)
+          break;
+        // 新的是多个的，先移除老的，再循环mount新的
+        case childType.MULTIPLE:
+          container.removeChild(preChildren.el)
+          for (let i = 0; i &lt; nextChildren.length; i++) {
+            mount(nextChildren[i], container)
+          }
+          break;
+      }
+      break;
+    // 老的是空的
+    case childType.EMPTY:
+      switch (nextChildFlag) {
+        // 新的是一个，直接mount
+        case childType.SINGLE:
+          mount(nextChildren, container)
+          break;
+        // 新的也是空的，不做处理
+        case childType.EMPTY:
+          break;
+        // 新的是多个，直接循环mount新的
+        case childType.MULTIPLE:
+          for (let i = 0; i &lt; nextChildren.length; i++) {
+            mount(nextChildren[i], container)
+          }
+          break;
+      }
+      break;
+    // 老的是多个
+    case childType.MULTIPLE:
+      switch (nextChildFlag) {
+        // 新的是一个，循环移除老的，再把新的mount上去
+        case childType.SINGLE:
+          for (let i = 0; i &lt; preChildren.length; i++) {
+            container.removeChild(preChildren[i]);
+          }
+          mount(nextChildren, container)
+          break;
+        // 新的是空的，循环移除老的，接下来无操作
+        case childType.EMPTY:
+          for (let i = 0; i &lt; preChildren.length; i++) {
+            container.removeChild(preChildren[i]);
+          }
+          break;
+        // 新的是多个的情况，比较复杂，React和Vue的实现不同。这里简单实现一下。
+        // 这个算法网上都有讲解，就不赘述了。
+        default:
+          let lastIndex = 0
+          for (let i = 0; i &lt; nextChildren.length; i++) {
+            const nextVNode = nextChildren[i]
+            let j = 0,
+              find = false
+            for (j; j &lt; preChildren.length; j++) {
+              const prevVNode = preChildren[j]
+              if (nextVNode.key === prevVNode.key) {
+                find = true
+                patch(prevVNode, nextVNode, container)
+                if (j &lt; lastIndex) {
+                  // 需要移动
+                  const refNode = nextChildren[i - 1].el.nextSibling
+                  container.insertBefore(prevVNode.el, refNode)
+                  break
+                } else {
+                  // 更新 lastIndex
+                  lastIndex = j
+                }
+              }
+            }
+            if (!find) {
+              // 挂载新节点
+              const refNode =
+                i - 1 &lt; 0
+                  ? preChildren[0].el
+                  : nextChildren[i - 1].el.nextSibling
+
+              mount(nextVNode, container, refNode)
+            }
+          }
+          // 移除已经不存在的节点
+          for (let i = 0; i &lt; preChildren.length; i++) {
+            const prevVNode = preChildren[i]
+            const has = nextChildren.find(
+              nextVNode =&gt; nextVNode.key === prevVNode.key
+            )
+            if (!has) {
+              // 移除
+              container.removeChild(prevVNode.el)
+            }
+          }
+          break;
+      }
+      break;
+  }
+}
+</code></pre>
+<p>至此，一次 <code>DOM</code> 更新就实现了。</p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                                                    <a rel="prev" href="../React/虚拟DOM.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+                        
+                                                    <a rel="next" href="../React/React事件简单记录.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+                        
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                                    <a rel="prev" href="../React/虚拟DOM.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+                
+                                    <a rel="next" href="../React/React事件简单记录.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+                            </nav>
+
+        </div>
+
+        
+        
+        
+                <script type="text/javascript">
+            window.playground_copyable = true;
+        </script>
+        
+        
+                <script src="../elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../searcher.js" type="text/javascript" charset="utf-8"></script>
+        
+        <script src="../clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+        
+        
+    </body>
+</html>
