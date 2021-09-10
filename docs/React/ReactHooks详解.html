@@ -1,0 +1,1347 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN" class="sidebar-visible no-js light">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>React Hooks 详解 - Rainning in the utopia</title>
+                
+
+        <!-- Custom HTML head -->
+        
+
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+                <link rel="icon" href="../favicon.svg">
+                        <link rel="shortcut icon" href="../favicon.png">
+                <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+                <link rel="stylesheet" href="../css/print.css" media="print">
+        
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../highlight.css">
+        <link rel="stylesheet" href="../tomorrow-night.css">
+        <link rel="stylesheet" href="../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        
+                <!-- MathJax -->
+        <script async type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+            </head>
+    <body>
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="../index.html">概述</a></li><li class="spacer"></li><li class="chapter-item expanded affix "><li class="part-title">JavaScript</li><li class="chapter-item expanded "><div><strong aria-hidden="true">1.</strong> 基础</div></li><li><ol class="section"><li class="chapter-item expanded "><a href="../JavaScript/作用域和闭包.html"><strong aria-hidden="true">1.1.</strong> 作用域和闭包</a></li><li class="chapter-item expanded "><a href="../JavaScript/JS变量.html"><strong aria-hidden="true">1.2.</strong> JS变量</a></li><li class="chapter-item expanded "><a href="../JavaScript/防抖和节流.html"><strong aria-hidden="true">1.3.</strong> 防抖和节流</a></li></ol></li><li class="chapter-item expanded "><div><strong aria-hidden="true">2.</strong> 进阶</div></li><li><ol class="section"><li class="chapter-item expanded "><a href="../JavaScript/函数相关（compose，pip，memoize，curry，偏函数）.html"><strong aria-hidden="true">2.1.</strong> 函数相关（compose，pip，memoize，curry，偏函数）</a></li></ol></li><li class="chapter-item expanded "><li class="part-title">CSS</li><li class="chapter-item expanded "><div><strong aria-hidden="true">3.</strong> 基础</div></li><li><ol class="section"><li class="chapter-item expanded "><a href="../CSS/居中布局.html"><strong aria-hidden="true">3.1.</strong> 居中布局的几种方式</a></li></ol></li><li class="chapter-item expanded "><li class="part-title">React</li><li class="chapter-item expanded "><div><strong aria-hidden="true">4.</strong> 虚拟DOM</div></li><li><ol class="section"><li class="chapter-item expanded "><a href="../React/虚拟DOM.html"><strong aria-hidden="true">4.1.</strong> 虚拟DOM</a></li><li class="chapter-item expanded "><a href="../React/手动实现一个虚拟DOM.html"><strong aria-hidden="true">4.2.</strong> 手动实现一个虚拟DOM</a></li></ol></li><li class="chapter-item expanded "><div><strong aria-hidden="true">5.</strong> React事件</div></li><li><ol class="section"><li class="chapter-item expanded "><a href="../React/React事件简单记录.html"><strong aria-hidden="true">5.1.</strong> 简单记录</a></li><li class="chapter-item expanded "><a href="../React/React事件机制.html"><strong aria-hidden="true">5.2.</strong> React事件机制源码简单分析</a></li></ol></li><li class="chapter-item expanded "><div><strong aria-hidden="true">6.</strong> Hooks</div></li><li><ol class="section"><li class="chapter-item expanded "><a href="../React/ReactHooks详解.html" class="active"><strong aria-hidden="true">6.1.</strong> React Hooks 详解</a></li></ol></li><li class="chapter-item expanded "><li class="part-title">Vue</li><li class="chapter-item expanded "><div><strong aria-hidden="true">7.</strong> Vue</div></li><li class="chapter-item expanded "><div><strong aria-hidden="true">8.</strong> Vuex</div></li><li><ol class="section"><li class="chapter-item expanded "><a href="../Vue/Vuex简单源码.html"><strong aria-hidden="true">8.1.</strong> Vuex简单源码</a></li></ol></li><li class="chapter-item expanded "><li class="part-title">网络</li><li class="chapter-item expanded "><div><strong aria-hidden="true">9.</strong> 网络基础</div></li><li class="chapter-item expanded "><div><strong aria-hidden="true">10.</strong> 扩展阅读</div></li><li><ol class="section"><li class="chapter-item expanded "><a href="../Network/HTTP2.0_&_HTTP3.0.html"><strong aria-hidden="true">10.1.</strong> HTTP2.0 &amp; HTTP3.0</a></li><li class="spacer"></li></ol></li></ol>            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                                                <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                                            </div>
+
+                    <h1 class="menu-title">Rainning in the utopia</h1>
+
+                    <div class="right-buttons">
+                                                <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                                                                        
+                    </div>
+                </div>
+
+                                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+                
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="react-hooks-详解-近-1w-字-项目实战"><a class="header" href="#react-hooks-详解-近-1w-字-项目实战">React Hooks 详解 【近 1W 字】+ 项目实战</a></h1>
+<p><a href="https://juejin.cn/post/6844903985338400782">引用</a></p>
+<h1 id="react-hooks"><a class="header" href="#react-hooks">React Hooks</a></h1>
+<h2 id="一什么是-hooks"><a class="header" href="#一什么是-hooks">一、什么是 Hooks</a></h2>
+<ul>
+<li>React 一直都提倡使用_<strong>函数组件</strong> <em>，但是有时候需要使用 state 或者其他一些功能时，只能使用</em> <strong>类组件</strong>_，因为函数组件没有实例，没有生命周期函数，只有类组件才有</li>
+<li>Hooks 是 React 16.8 新增的特性，它可以让你在不编写 class 的情况下使用 state 以及其他的 React 特性</li>
+<li>如果你在编写函数组件并意识到需要向其添加一些 state，以前的做法是必须将其它转化为 class。现在你可以直接在现有的函数组件中使用 Hooks</li>
+<li>凡是 use 开头的 React API 都是 Hooks</li>
+</ul>
+<h2 id="二hooks-解决的问题"><a class="header" href="#二hooks-解决的问题">二、Hooks 解决的问题</a></h2>
+<h3 id="1-类组件的不足"><a class="header" href="#1-类组件的不足">1. 类组件的不足</a></h3>
+<ul>
+<li>
+<p><strong>状态逻辑难复用：</strong> 在组件之间复用状态逻辑很难，可能要用到 <strong>render props</strong> （<strong>渲染属性</strong>）或者
+<strong>HOC</strong>（<strong>高阶组件</strong>），但无论是渲染属性，还是高阶组件，都会在原先的组件外包裹一层父容器（一般都是 div 元素），<strong>导致层级冗余</strong></p>
+</li>
+<li>
+<p>趋向复杂难以维护：</p>
+<ul>
+<li>在生命周期函数中混杂不相干的逻辑（如：在 <code>componentDidMount</code> 中注册事件以及其他的逻辑，在 <code>componentWillUnmount</code>
+中卸载事件，这样分散不集中的写法，很容易写出 bug ）</li>
+<li>类组件中到处都是对状态的访问和处理，导致组件难以拆分成更小的组件</li>
+</ul>
+</li>
+<li>
+<p>this 指向问题</p>
+<ul>
+<li>
+<p>父组件给子组件传递函数时，必须绑定 this</p>
+</li>
+<li>
+<p>react 中的组件四种绑定 this 方法的区别</p>
+</li>
+</ul>
+</li>
+</ul>
+<pre><code class="language-javascript">class App extends React.Component&lt;any, any&gt; {
+    handleClick2;
+
+    constructor(props) {
+        super(props);
+        this.state = {
+            num: 1,
+            title: ' react study'
+        };
+        this.handleClick2 = this.handleClick1.bind(this);
+    }
+
+    handleClick1() {
+        this.setState({
+            num: this.state.num + 1,
+        })
+    }
+
+    handleClick3 = () =&gt; {
+        this.setState({
+            num: this.state.num + 1,
+        })
+    };
+
+    render() {
+        return (&lt;div&gt;
+            &lt;h2&gt;Ann, {this.state.num}&lt;/h2&gt;
+            &lt;button onClick={this.handleClick2}&gt;btn1&lt;/button&gt;
+            &lt;button onClick={this.handleClick1.bind(this)}&gt;btn2&lt;/button&gt;
+            &lt;button onClick={() =&gt; this.handleClick1()}&gt;btn3&lt;/button&gt;
+            &lt;button onClick={this.handleClick3}&gt;btn4&lt;/button&gt;
+        &lt;/div&gt;)
+    }
+}
+</code></pre>
+<p>前提：子组件内部做了性能优化，如（<strong>React.PureComponent</strong>）</p>
+<ul>
+<li>第一种是<strong>在构造函数中绑定 this</strong>：那么每次父组件刷新的时候，如果传递给子组件其他的 props 值不变，那么子组件就不会刷新；</li>
+<li>第二种是<strong>在 render() 函数里面绑定 this</strong>：因为 <strong>bind 函数会返回一个新的函数</strong>，所以每次父组件刷新时，都会重新生成一个函数，即使父组件传递给子组件其他的 props
+值不变，子组件每次都会刷新；</li>
+<li>第三种是<strong>使用箭头函数</strong>：父组件刷新的时候，即使两个箭头函数的函数体是一样的，都会生成一个新的箭头函数，所以子组件每次都会刷新；</li>
+<li>第四种是<strong>使用类的静态属性：原理和第一种方法差不多，比第一种更简洁</strong></li>
+</ul>
+<p>综上所述，如果不注意的话，很容易写成第三种写法，导致性能上有所损耗。</p>
+<h3 id="2-hooks-优势"><a class="header" href="#2-hooks-优势">2. Hooks 优势</a></h3>
+<ul>
+<li>能优化类组件的三大问题</li>
+<li>能在无需修改组件结构的情况下复用状态逻辑（自定义 Hooks ）</li>
+<li>能将组件中相互关联的部分拆分成更小的函数（比如设置订阅或请求数据）</li>
+<li><strong>副作用的关注点分离</strong>：<strong>副作用指那些没有发生在数据向视图转换过程中的逻辑，如 <code>ajax</code> 请求、访问原生<code>dom</code>
+元素、本地持久化缓存、绑定/解绑事件、添加订阅、设置定时器、记录日志等</strong>。以往这些副作用都是写在类组件生命周期函数中的。而 <code>useEffect</code>
+在全部渲染完毕后才会执行，<code>useLayoutEffect</code> 会在浏览器 <code>layout</code> 之后，<code>painting</code> 之前执行。</li>
+</ul>
+<h2 id="三注意事项"><a class="header" href="#三注意事项">三、注意事项</a></h2>
+<ul>
+<li><strong>只能在函数内部的最外层调用 Hook，不要在循环、条件判断或者子函数中调用</strong></li>
+<li><strong>只能在 React 的函数组件中调用 Hook，不要在其他 JavaScript 函数中调用</strong></li>
+<li><a href="https://reactjs.org/warnings/invalid-hook-call-warning.html"><strong>https://reactjs.org/warnings/invalid-hook-call-warning.html</strong></a></li>
+</ul>
+<h2 id="四usestate--usememo--usecallback"><a class="header" href="#四usestate--usememo--usecallback">四、useState &amp; useMemo &amp; useCallback</a></h2>
+<ul>
+<li>
+<p><strong>React 假设当你多次调用 useState 的时候，你能保证每次渲染时它们的调用顺序是不变的。</strong></p>
+</li>
+<li>
+<p>通过在函数组件里调用它来给组件添加一些内部 state，React会 <strong>在重复渲染时保留这个 state</strong></p>
+</li>
+<li>
+<p>useState 唯一的参数就是初始 state</p>
+</li>
+<li>
+<p>useState 会返回一个数组</p>
+<ul>
+<li>
+<p>一个 state，一个更新 state 的函数</p>
+</li>
+<li>
+<p>在初始化渲染期间，返回的状态 (state) 与传入的第一个参数 (initialState) 值相同</p>
+</li>
+</ul>
+</li>
+<li>
+<p>你可以在事件处理函数中或其他一些地方调用这个函数。它类似 class 组件的 this.setState，但是它<strong>不会把新的 state 和旧的 state 进行合并，而是直接替换</strong></p>
+</li>
+</ul>
+<pre><code class="language-javascript">// 这里可以任意命名，因为返回的是数组，数组解构
+const [state, setState] = useState(initialState);
+</code></pre>
+<h3 id="41-使用例子"><a class="header" href="#41-使用例子">4.1 使用例子</a></h3>
+<pre><code class="language-javascript">import React, { useState } from &quot;react&quot;;
+import ReactDOM from &quot;react-dom&quot;;
+
+function Child1(porps) {
+  console.log(porps);
+  const { num, handleClick } = porps;
+  return (
+    &lt;div
+      onClick={() =&gt; {
+        handleClick(num + 1);
+      }}
+    &gt;
+      child
+    &lt;/div&gt;
+  );
+}
+
+function Child2(porps) {
+  // console.log(porps);
+  const { text, handleClick } = porps;
+  return (
+    &lt;div&gt;
+      child2
+      &lt;Grandson text={text} handleClick={handleClick} /&gt;
+    &lt;/div&gt;
+  );
+}
+
+function Grandson(porps) {
+  console.log(porps);
+  const { text, handleClick } = porps;
+  return (
+    &lt;div
+      onClick={() =&gt; {
+        handleClick(text + 1);
+      }}
+    &gt;
+      grandson
+    &lt;/div&gt;
+  );
+}
+
+function Parent() {
+  let [num, setNum] = useState(0);
+  let [text, setText] = useState(1);
+
+  return (
+    &lt;div&gt;
+      &lt;Child1 num={num} handleClick={setNum} /&gt;
+      &lt;Child2 text={text} handleClick={setText} /&gt;
+    &lt;/div&gt;
+  );
+}
+
+const rootElement = document.getElementById(&quot;root&quot;);
+ReactDOM.render(&lt;Parent /&gt;, rootElement);
+</code></pre>
+<h3 id="42-每次渲染都是独立的闭包"><a class="header" href="#42-每次渲染都是独立的闭包">4.2 每次渲染都是独立的闭包</a></h3>
+<ul>
+<li>每一次渲染都有它自己的 Props 和 State</li>
+<li>每一次渲染都有它自己的事件处理函数</li>
+<li>当点击更新状态的时候，函数组件都会重新被调用，那么每次渲染都是独立的，取到的值不会受后面操作的影响</li>
+</ul>
+<pre><code class="language-javascript">function Counter2(){
+  let [number,setNumber] = useState(0);
+  function alertNumber(){
+    setTimeout(()=&gt;{
+      // alert 只能获取到点击按钮时的那个状态
+      alert(number);
+    },3000);
+  }
+  return (
+      &lt;&gt;
+          &lt;p&gt;{number}&lt;/p&gt;
+          &lt;button onClick={()=&gt;setNumber(number+1)}&gt;+&lt;/button&gt;
+          &lt;button onClick={alertNumber}&gt;alertNumber&lt;/button&gt;
+      &lt;/&gt;
+  )
+}
+</code></pre>
+<h3 id="43-函数式更新"><a class="header" href="#43-函数式更新">4.3 函数式更新</a></h3>
+<ul>
+<li><strong>如果新的 state 需要通过使用先前的 state 计算得出，那么可以将回调函数当做参数传递给 setState。该回调函数将接收先前的 state，并返回一个更新后的值。</strong></li>
+</ul>
+<pre><code class="language-javascript">function Counter(){
+    let [number,setNumber] = useState(0);
+    function lazy(){
+        setTimeout(() =&gt; {
+            // setNumber(number+1);
+            // 这样每次执行时都会去获取一遍 state，而不是使用点击触发时的那个 state
+            setNumber(number=&gt;number+1);
+        }, 3000);
+    }
+    return (
+        &lt;&gt;
+           &lt;p&gt;{number}&lt;/p&gt;
+           &lt;button onClick={()=&gt;setNumber(number+1)}&gt;+&lt;/button&gt;
+           &lt;button onClick={lazy}&gt;lazy&lt;/button&gt;
+        &lt;/&gt;
+    )
+}
+</code></pre>
+<h3 id="44-惰性初始化-state"><a class="header" href="#44-惰性初始化-state">4.4 惰性初始化 state</a></h3>
+<ul>
+<li><strong>initialState 参数只会在组件的初始化渲染中起作用，后续渲染时会被忽略</strong></li>
+<li><strong>如果初始 state 需要通过复杂计算获得，则可以传入一个函数，在函数中计算并返回初始的 state，此函数只在初始渲染时被调用</strong></li>
+</ul>
+<pre><code class="language-javascript">function Counter5(props){
+    console.log('Counter5 render');
+    // 这个函数只在初始渲染时执行一次，后续更新状态重新渲染组件时，该函数就不会再被调用
+    function getInitState(){
+        return {number:props.number};
+    }
+    let [counter,setCounter] = useState(getInitState);
+    return (
+        &lt;&gt;
+           &lt;p&gt;{counter.number}&lt;/p&gt;
+           &lt;button onClick={()=&gt;setCounter({number:counter.number+1})}&gt;+&lt;/button&gt;
+           &lt;button onClick={()=&gt;setCounter(counter)}&gt;setCounter&lt;/button&gt;
+        &lt;/&gt;
+    )
+}
+</code></pre>
+<h3 id="45-性能优化"><a class="header" href="#45-性能优化">4.5 性能优化</a></h3>
+<h4 id="451-objectis-浅比较"><a class="header" href="#451-objectis-浅比较">4.5.1 Object.is （浅比较）</a></h4>
+<ul>
+<li>Hook 内部使用 Object.is 来比较新/旧 state 是否相等</li>
+<li><strong>与 class 组件中的 setState 方法不同，如果你修改状态的时候，传的状态值没有变化，则不重新渲染</strong></li>
+<li><strong>与 class 组件中的 setState 方法不同，useState 不会自动合并更新对象。你可以用函数式的 setState 结合展开运算符来达到合并更新对象的效果</strong></li>
+</ul>
+<pre><code class="language-javascript">function Counter(){
+    const [counter,setCounter] = useState({name:'计数器',number:0});
+    console.log('render Counter')
+    // 如果你修改状态的时候，传的状态值没有变化，则不重新渲染
+    return (
+        &lt;&gt;
+            &lt;p&gt;{counter.name}:{counter.number}&lt;/p&gt;
+            &lt;button onClick={()=&gt;setCounter({...counter,number:counter.number+1})}&gt;+&lt;/button&gt;
+            &lt;button onClick={()=&gt;setCounter(counter)}&gt;++&lt;/button&gt;
+        &lt;/&gt;
+    )
+}
+</code></pre>
+<h4 id="452-减少渲染次数"><a class="header" href="#452-减少渲染次数">4.5.2 减少渲染次数</a></h4>
+<ul>
+<li><strong>默认情况，只要父组件状态变了（不管子组件依不依赖该状态），子组件也会重新渲染</strong></li>
+<li>一般的优化：
+<ol>
+<li><strong>类组件</strong>：可以使用 <code>pureComponent</code> ；</li>
+<li><strong>函数组件</strong>：使用 <code>React.memo</code> ，将函数组件传递给 <code>memo</code> 之后，就会返回一个新的组件，新组件的功能：<strong>如果接受到的属性不变，则不重新渲染函数</strong>；</li>
+</ol>
+</li>
+<li><strong>但是怎么保证属性不会变尼？这里使用 useState ，每次更新都是独立的</strong>，<code>const [number,setNumber] = useState(0)</code>
+<strong>也就是说每次都会生成一个新的值（哪怕这个值没有变化），即使使用了 <code>React.memo</code> ，也还是会重新渲染</strong></li>
+</ul>
+<pre><code class="language-javascript">import React,{useState,memo,useMemo,useCallback} from 'react';
+
+function SubCounter({onClick,data}){
+    console.log('SubCounter render');
+    return (
+        &lt;button onClick={onClick}&gt;{data.number}&lt;/button&gt;
+    )
+}
+SubCounter = memo(SubCounter);
+export  default  function Counter6(){
+    console.log('Counter render');
+    const [name,setName]= useState('计数器');
+    const [number,setNumber] = useState(0);
+    const data ={number};
+    const addClick = ()=&gt;{
+        setNumber(number+1);
+    };
+    return (
+        &lt;&gt;
+            &lt;input type=&quot;text&quot; value={name} onChange={(e)=&gt;setName(e.target.value)}/&gt;
+            &lt;SubCounter data={data} onClick={addClick}/&gt;
+        &lt;/&gt;
+    )
+}
+</code></pre>
+<ul>
+<li>更深入的优化：
+<ol>
+<li><strong>useCallback</strong>：接收一个内联回调函数参数和一个依赖项数组（子组件依赖父组件的状态，即子组件会使用到父组件的值） ，useCallback 会返回该回调函数的 memoized
+版本，该回调函数仅在某个依赖项改变时才会更新</li>
+<li><strong>useMemo</strong>：把创建函数和依赖项数组作为参数传入 <code>useMemo</code>，它仅会在某个依赖项改变时才重新计算 memoized 值。这种优化有助于避免在每次渲染时都进行高开销的计算</li>
+</ol>
+</li>
+</ul>
+<pre><code class="language-javascript">import React,{useState,memo,useMemo,useCallback} from 'react';
+
+function SubCounter({onClick,data}){
+    console.log('SubCounter render');
+    return (
+        &lt;button onClick={onClick}&gt;{data.number}&lt;/button&gt;
+    )
+}
+SubCounter = memo(SubCounter);
+
+let oldData,oldAddClick;
+export  default  function Counter2(){
+    console.log('Counter render');
+    const [name,setName]= useState('计数器');
+    const [number,setNumber] = useState(0);
+    // 父组件更新时，这里的变量和函数每次都会重新创建，那么子组件接受到的属性每次都会认为是新的
+    // 所以子组件也会随之更新，这时候可以用到 useMemo
+    // 有没有后面的依赖项数组很重要，否则还是会重新渲染
+    // 如果后面的依赖项数组没有值的话，即使父组件的 number 值改变了，子组件也不会去更新
+    //const data = useMemo(()=&gt;({number}),[]);
+    const data = useMemo(()=&gt;({number}),[number]);
+    console.log('data===oldData ',data===oldData);
+    oldData = data;
+    
+    // 有没有后面的依赖项数组很重要，否则还是会重新渲染
+    const addClick = useCallback(()=&gt;{
+        setNumber(number+1);
+    },[number]);
+    console.log('addClick===oldAddClick ',addClick===oldAddClick);
+    oldAddClick=addClick;
+    return (
+        &lt;&gt;
+            &lt;input type=&quot;text&quot; value={name} onChange={(e)=&gt;setName(e.target.value)}/&gt;
+            &lt;SubCounter data={data} onClick={addClick}/&gt;
+        &lt;/&gt;
+    )
+}
+</code></pre>
+<h3 id="46-usestate-源码中的链表实现"><a class="header" href="#46-usestate-源码中的链表实现">4.6 useState 源码中的链表实现</a></h3>
+<pre><code class="language-javascript">import React from 'react';
+import ReactDOM from 'react-dom';
+
+let firstWorkInProgressHook = {memoizedState: null, next: null};
+let workInProgressHook;
+
+function useState(initState) {
+    let currentHook = workInProgressHook.next ? workInProgressHook.next : {memoizedState: initState, next: null};
+
+    function setState(newState) {
+        currentHook.memoizedState = newState;
+        render();
+    }
+   // 这就是为什么 useState 书写顺序很重要的原因
+  // 假如某个 useState 没有执行，会导致指针移动出错，数据存取出错
+    if (workInProgressHook.next) {
+        // 这里只有组件刷新的时候，才会进入
+        // 根据书写顺序来取对应的值
+        // console.log(workInProgressHook);
+        workInProgressHook = workInProgressHook.next;
+    } else {
+        // 只有在组件初始化加载时，才会进入
+        // 根据书写顺序，存储对应的数据
+        // 将 firstWorkInProgressHook 变成一个链表结构
+        workInProgressHook.next = currentHook;
+        // 将 workInProgressHook 指向 {memoizedState: initState, next: null}
+        workInProgressHook = currentHook;
+        // console.log(firstWorkInProgressHook);
+    }
+    return [currentHook.memoizedState, setState];
+}
+
+function Counter() {
+    // 每次组件重新渲染的时候，这里的 useState 都会重新执行
+    const [name, setName] = useState('计数器');
+    const [number, setNumber] = useState(0);
+    return (
+        &lt;&gt;
+            &lt;p&gt;{name}:{number}&lt;/p&gt;
+            &lt;button onClick={() =&gt; setName('新计数器' + Date.now())}&gt;新计数器&lt;/button&gt;
+            &lt;button onClick={() =&gt; setNumber(number + 1)}&gt;+&lt;/button&gt;
+        &lt;/&gt;
+    )
+}
+
+function render() {
+    // 每次重新渲染的时候，都将 workInProgressHook 指向 firstWorkInProgressHook
+    workInProgressHook = firstWorkInProgressHook;
+    ReactDOM.render(&lt;Counter/&gt;, document.getElementById('root'));
+}
+
+render();
+</code></pre>
+<h2 id="五usereducer"><a class="header" href="#五usereducer">五、useReducer</a></h2>
+<ul>
+<li>useReducer 和 redux 中 reducer 很像</li>
+<li>useState 内部就是靠 useReducer 来实现的</li>
+<li>useState 的替代方案，它接收一个形如 (state, action) =&gt; newState 的 reducer，并返回当前的 state 以及与其配套的 dispatch 方法</li>
+<li>在某些场景下，useReducer 会比 useState 更适用，例如 state 逻辑较复杂且包含多个子值，或者下一个 state 依赖于之前的 state 等</li>
+</ul>
+<pre><code class="language-javascript">let initialState = 0;
+// 如果你希望初始状态是一个{number:0}
+// 可以在第三个参数中传递一个这样的函数 ()=&gt;({number:initialState})
+// 这个函数是一个惰性初始化函数，可以用来进行复杂的计算，然后返回最终的 initialState
+const [state, dispatch] = useReducer(reducer, initialState, init);
+
+const initialState = 0;
+function reducer(state, action) {
+  switch (action.type) {
+    case 'increment':
+      return {number: state.number + 1};
+    case 'decrement':
+      return {number: state.number - 1};
+    default:
+      throw new Error();
+  }
+}
+function init(initialState){
+    return {number:initialState};
+}
+function Counter(){
+    const [state, dispatch] = useReducer(reducer, initialState,init);
+    return (
+        &lt;&gt;
+          Count: {state.number}
+          &lt;button onClick={() =&gt; dispatch({type: 'increment'})}&gt;+&lt;/button&gt;
+          &lt;button onClick={() =&gt; dispatch({type: 'decrement'})}&gt;-&lt;/button&gt;
+        &lt;/&gt;
+    )
+}
+</code></pre>
+<h2 id="六usecontext"><a class="header" href="#六usecontext">六、useContext</a></h2>
+<ul>
+<li>接收一个 context 对象（React.createContext 的返回值）并返回该 context 的当前值</li>
+<li>当前的 context 值由上层组件中距离当前组件最近的 &lt;MyContext.Provider&gt; 的 value prop 决定</li>
+<li>当组件上层最近的 &lt;MyContext.Provider&gt; 更新时，该 Hook 会触发重渲染，并使用最新传递给 MyContext provider 的 context value 值</li>
+<li><strong>useContext(MyContext) 相当于 class 组件中的</strong> <code>static contextType = MyContext</code> 或者
+<code>&lt;MyContext.Consumer&gt;</code></li>
+<li><strong>useContext(MyContext) 只是让你能够读取 context 的值以及订阅 context 的变化。你仍然需要在上层组件树中使用 来为下层组件提供 context</strong></li>
+</ul>
+<pre><code class="language-javascript">import React,{useState,memo,useMemo,useCallback,useReducer,createContext,useContext} from 'react';
+import ReactDOM from 'react-dom';
+
+const initialState = 0;
+function reducer(state=initialState,action){
+    switch(action.type){
+        case 'ADD':
+            return {number:state.number+1};
+        default:
+            break; 
+    }
+}
+
+const CounterContext = createContext();
+// 第一种获取 CounterContext 方法：不使用 hook
+function SubCounter_one(){
+    return (
+        &lt;CounterContext.Consumer&gt;
+            {
+                value=&gt;(
+                    &lt;&gt;
+                    &lt;p&gt;{value.state.number}&lt;/p&gt;
+                    &lt;button onClick={()=&gt;value.dispatch({type:'ADD'})}&gt;+&lt;/button&gt;
+                    &lt;/&gt;
+                )
+            }
+         
+        &lt;/CounterContext.Consumer&gt;
+    )
+}
+// 第二种获取 CounterContext 方法：使用 hook ，更简洁
+function SubCounter(){
+    const {state, dispatch} = useContext(CounterContext);
+    return (
+        &lt;&gt;
+            &lt;p&gt;{state.number}&lt;/p&gt;
+            &lt;button onClick={()=&gt;dispatch({type:'ADD'})}&gt;+&lt;/button&gt;
+        &lt;/&gt;
+    )
+}
+/* class SubCounter extends React.Component{
+    static contextTypes = CounterContext
+    this.context =  {state, dispatch}
+} */
+
+function Counter(){
+    const [state, dispatch] = useReducer((reducer), initialState, ()=&gt;({number:initialState}));
+    return (
+        &lt;CounterContext.Provider value={{state, dispatch}}&gt;
+            &lt;SubCounter/&gt;
+        &lt;/CounterContext.Provider&gt;
+    )
+}
+ReactDOM.render(&lt;Counter  /&gt;, document.getElementById('root'));
+</code></pre>
+<h2 id="七useeffect"><a class="header" href="#七useeffect">七、useEffect</a></h2>
+<ul>
+<li><strong>effect（副作用）：指那些没有发生在数据向视图转换过程中的逻辑，如 <code>ajax</code> 请求、访问原生<code>dom</code> 元素、本地持久化缓存、绑定/解绑事件、添加订阅、设置定时器、记录日志等。</strong></li>
+<li><strong>副作用操作可以分两类：需要清除的和不需要清除的。</strong></li>
+<li>原先在函数组件内（这里指在 React 渲染阶段）改变 dom 、发送 ajax 请求以及执行其他包含副作用的操作都是不被允许的，因为这可能会产生莫名其妙的 bug 并破坏 UI 的一致性</li>
+<li>useEffect 就是一个 Effect Hook，给函数组件增加了操作副作用的能力。它跟 class 组件中的 <code>componentDidMount</code>、<code>componentDidUpdate</code>
+和 <code>componentWillUnmount</code> 具有相同的用途，只不过被合并成了一个 API</li>
+<li><strong>useEffect 接收一个函数，该函数会在组件渲染到屏幕之后才执行，该函数有要求：要么返回一个能清除副作用的函数，要么就不返回任何内容</strong></li>
+<li>与 <code>componentDidMount</code> 或 <code>componentDidUpdate</code> 不同，使用 useEffect 调度的 effect
+不会阻塞浏览器更新屏幕，这让你的应用看起来响应更快。大多数情况下，effect 不需要同步地执行。在个别情况下（例如测量布局），有单独的 useLayoutEffect Hook 供你使用，其
+API 与 useEffect 相同。</li>
+</ul>
+<h3 id="71-使用-class-组件实现修改标题"><a class="header" href="#71-使用-class-组件实现修改标题">7.1 使用 class 组件实现修改标题</a></h3>
+<ul>
+<li>在这个 class 中，我们需要在两个生命周期函数中编写重复的代码，这是因为很多情况下，我们希望在组件加载和更新时执行同样的操作。我们希望它在每次渲染之后执行，但 React 的 class
+组件没有提供这样的方法。即使我们提取出一个方法，我们还是要在两个地方调用它。而 <strong>useEffect 会在第一次渲染之后和每次更新之后都会执行</strong></li>
+</ul>
+<pre><code class="language-javascript">class Counter extends React.Component{
+    state = {number:0};
+    add = ()=&gt;{
+        this.setState({number:this.state.number+1});
+    };
+    componentDidMount(){
+        this.changeTitle();
+    }
+    componentDidUpdate(){
+        this.changeTitle();
+    }
+    changeTitle = ()=&gt;{
+        document.title = `你已经点击了${this.state.number}次`;
+    };
+    render(){
+        return (
+            &lt;&gt;
+              &lt;p&gt;{this.state.number}&lt;/p&gt;
+              &lt;button onClick={this.add}&gt;+&lt;/button&gt;
+            &lt;/&gt;
+        )
+    }
+}
+</code></pre>
+<h3 id="72-使用-useeffect-来实现修改标题"><a class="header" href="#72-使用-useeffect-来实现修改标题">7.2 使用 useEffect 来实现修改标题</a></h3>
+<ul>
+<li>每次我们重新渲染，都会生成新的 effect，替换掉之前的。某种意义上讲，effect 更像是渲染结果的一部分 —— 每个 effect 属于一次特定的渲染。</li>
+</ul>
+<pre><code class="language-javascript">import React,{Component,useState,useEffect} from 'react';
+import ReactDOM from 'react-dom';
+function Counter(){
+    const [number,setNumber] = useState(0);
+    // useEffect里面的这个函数会在第一次渲染之后和更新完成后执行
+    // 相当于 componentDidMount 和 componentDidUpdate:
+    useEffect(() =&gt; {
+        document.title = `你点击了${number}次`;
+    });
+    return (
+        &lt;&gt;
+            &lt;p&gt;{number}&lt;/p&gt;
+            &lt;button onClick={()=&gt;setNumber(number+1)}&gt;+&lt;/button&gt;
+        &lt;/&gt;
+    )
+}
+ReactDOM.render(&lt;Counter /&gt;, document.getElementById('root'));
+</code></pre>
+<h3 id="73-清除副作用"><a class="header" href="#73-清除副作用">7.3 清除副作用</a></h3>
+<ul>
+<li><strong>副作用函数还可以通过返回一个函数来指定如何清除副作用，为防止内存泄漏，清除函数会在组件卸载前执行。如果组件多次渲染，则在执行下一个 effect 之前，上一个 effect 就已被清除。</strong></li>
+</ul>
+<pre><code class="language-javascript">function Counter(){
+    let [number,setNumber] = useState(0);
+    let [text,setText] = useState('');
+    // 相当于componentDidMount 和 componentDidUpdate
+    useEffect(()=&gt;{
+        console.log('开启一个新的定时器')
+        let $timer = setInterval(()=&gt;{
+            setNumber(number=&gt;number+1);
+        },1000);
+        // useEffect 如果返回一个函数的话，该函数会在组件卸载和更新时调用
+        // useEffect 在执行副作用函数之前，会先调用上一次返回的函数
+        // 如果要清除副作用，要么返回一个清除副作用的函数
+       /*  return ()=&gt;{
+            console.log('destroy effect');
+            clearInterval($timer);
+        } */
+    });
+    // },[]);//要么在这里传入一个空的依赖项数组，这样就不会去重复执行
+    return (
+        &lt;&gt;
+          &lt;input value={text} onChange={(event)=&gt;setText(event.target.value)}/&gt;
+          &lt;p&gt;{number}&lt;/p&gt;
+          &lt;button&gt;+&lt;/button&gt;
+        &lt;/&gt;
+    )
+}
+</code></pre>
+<h3 id="74-跳过-effect-进行性能优化"><a class="header" href="#74-跳过-effect-进行性能优化">7.4 跳过 effect 进行性能优化</a></h3>
+<ul>
+<li>依赖项数组控制着 useEffect 的执行</li>
+<li>如果某些特定值在两次重渲染之间没有发生变化，你可以通知 React 跳过对 effect 的调用，只要传递数组作为 useEffect 的第二个可选参数即可</li>
+<li>如果想执行只运行一次的 effect（仅在组件挂载和卸载时执行），可以传递一个空数组（[]）作为第二个参数。这就告诉 React 你的 effect 不依赖于 props 或 state
+中的任何值，所以它永远都不需要重复执行</li>
+<li>推荐启用
+<a href="https://www.npmjs.com/package/eslint-plugin-react-hooks#installation">eslint-plugin-react-hooks</a>
+中的 <a href="https://github.com/facebook/react/issues/14920">exhaustive-deps</a> 规则。此规则会在添加错误依赖时发出警告并给出修复建议。</li>
+</ul>
+<pre><code class="language-javascript">function Counter(){
+    let [number,setNumber] = useState(0);
+    let [text,setText] = useState('');
+    // 相当于componentDidMount 和 componentDidUpdate
+    useEffect(()=&gt;{
+        console.log('useEffect');
+        let $timer = setInterval(()=&gt;{
+            setNumber(number=&gt;number+1);
+        },1000);
+    },[text]);// 数组表示 effect 依赖的变量，只有当这个变量发生改变之后才会重新执行 efffect 函数
+    return (
+        &lt;&gt;
+          &lt;input value={text} onChange={(event)=&gt;setText(event.target.value)}/&gt;
+          &lt;p&gt;{number}&lt;/p&gt;
+          &lt;button&gt;+&lt;/button&gt;
+        &lt;/&gt;
+    )
+}
+</code></pre>
+<h3 id="75-使用多个-effect-实现关注点分离"><a class="header" href="#75-使用多个-effect-实现关注点分离">7.5 使用多个 Effect 实现关注点分离</a></h3>
+<ul>
+<li>使用 Hook 其中一个目的就是要解决 class 中生命周期函数经常包含不相关的逻辑，但又把相关逻辑分离到了几个不同方法中的问题。</li>
+</ul>
+<pre><code class="language-javascript">// 类组件版
+class FriendStatusWithCounter extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = { count: 0, isOnline: null };
+    this.handleStatusChange = this.handleStatusChange.bind(this);
+  }
+
+  componentDidMount() {
+    document.title = `You clicked ${this.state.count} times`;
+    ChatAPI.subscribeToFriendStatus(
+      this.props.friend.id,
+      this.handleStatusChange
+    );
+  }
+
+  componentDidUpdate() {
+    document.title = `You clicked ${this.state.count} times`;
+  }
+
+  componentWillUnmount() {
+    ChatAPI.unsubscribeFromFriendStatus(
+      this.props.friend.id,
+      this.handleStatusChange
+    );
+  }
+
+  handleStatusChange(status) {
+    this.setState({
+      isOnline: status.isOnline
+    });
+  }
+  // ...
+</code></pre>
+<ul>
+<li>可以发现设置 <code>document.title</code> 的逻辑是如何被分割到 <code>componentDidMount</code> 和 <code>componentDidUpdate</code> 中的，订阅逻辑又是如何被分割到
+<code>componentDidMount</code> 和 <code>componentWillUnmount</code> 中的。而且 <code>componentDidMount</code>
+中同时包含了两个不同功能的代码。这样会使得生命周期函数很混乱。</li>
+<li><strong>Hook 允许我们按照代码的用途分离他们，</strong> 而不是像生命周期函数那样。React 将按照 effect 声明的顺序依次调用组件中的 每一个 effect。</li>
+</ul>
+<pre><code class="language-javascript">// Hooks 版
+function FriendStatusWithCounter(props) {
+  const [count, setCount] = useState(0);
+  useEffect(() =&gt; {
+    document.title = `You clicked ${count} times`;
+  });
+
+  const [isOnline, setIsOnline] = useState(null);
+  useEffect(() =&gt; {
+    function handleStatusChange(status) {
+      setIsOnline(status.isOnline);
+    }
+
+    ChatAPI.subscribeToFriendStatus(props.friend.id, handleStatusChange);
+    return () =&gt; {
+      ChatAPI.unsubscribeFromFriendStatus(props.friend.id, handleStatusChange);
+    };
+  });
+  // ...
+}
+</code></pre>
+<h2 id="八uselayouteffect"><a class="header" href="#八uselayouteffect">八、useLayoutEffect</a></h2>
+<p><img src="./images/useLayoutEffect.png" alt="img" /></p>
+<ul>
+<li><strong>useEffect 在全部渲染完毕后才会执行</strong></li>
+<li><strong>useLayoutEffect 会在 浏览器 layout 之后，painting 之前执行</strong></li>
+<li>其函数签名与 useEffect 相同，但它会在所有的 DOM 变更之后<strong>同步</strong>调用 effect</li>
+<li><strong>可以使用它来读取 DOM 布局并同步触发重渲染</strong></li>
+<li>在浏览器执行绘制之前 useLayoutEffect 内部的更新计划将被<strong>同步</strong>刷新</li>
+<li><strong>尽可能使用标准的 useEffect 以避免阻塞视图更新</strong></li>
+</ul>
+<pre><code class="language-javascript">function LayoutEffect() {
+    const [color, setColor] = useState('red');
+    useLayoutEffect(() =&gt; {
+        alert(color);
+    });
+    useEffect(() =&gt; {
+        console.log('color', color);
+    });
+    return (
+        &lt;&gt;
+            &lt;div id=&quot;myDiv&quot; style={{ background: color }}&gt;颜色&lt;/div&gt;
+            &lt;button onClick={() =&gt; setColor('red')}&gt;红&lt;/button&gt;
+            &lt;button onClick={() =&gt; setColor('yellow')}&gt;黄&lt;/button&gt;
+            &lt;button onClick={() =&gt; setColor('blue')}&gt;蓝&lt;/button&gt;
+        &lt;/&gt;
+    );
+}
+</code></pre>
+<h2 id="九useref--useimperativehandle"><a class="header" href="#九useref--useimperativehandle">九、useRef &amp; useImperativeHandle</a></h2>
+<h3 id="81-useref"><a class="header" href="#81-useref">8.1 useRef</a></h3>
+<ul>
+<li>类组件、React 元素用 React.createRef，函数组件使用 useRef</li>
+<li>useRef 返回一个可变的 ref 对象，其 <code>current</code> 属性被初始化为传入的参数（initialValue）</li>
+</ul>
+<pre><code class="language-javascript">const refContainer = useRef(initialValue);
+</code></pre>
+<ul>
+<li><strong>useRef 返回的 ref 对象在组件的整个生命周期内保持不变，也就是说每次重新渲染函数组件时，返回的ref 对象都是同一个（使用 React.createRef
+，每次重新渲染组件都会重新创建 ref）</strong></li>
+</ul>
+<pre><code class="language-javascript">import React, { useState, useEffect, useRef } from 'react';
+import ReactDOM from 'react-dom';
+function Parent() {
+    let [number, setNumber] = useState(0);
+    return (
+        &lt;&gt;
+            &lt;Child /&gt;
+            &lt;button onClick={() =&gt; setNumber({ number: number + 1 })}&gt;+&lt;/button&gt;
+        &lt;/&gt;
+    )
+}
+let input;
+function Child() {
+    const inputRef = useRef();
+    console.log('input===inputRef', input === inputRef);
+    input = inputRef;
+    function getFocus() {
+        inputRef.current.focus();
+    }
+    return (
+        &lt;&gt;
+            &lt;input type=&quot;text&quot; ref={inputRef} /&gt;
+            &lt;button onClick={getFocus}&gt;获得焦点&lt;/button&gt;
+        &lt;/&gt;
+    )
+}
+ReactDOM.render(&lt;Parent /&gt;, document.getElementById('root'));
+</code></pre>
+<h3 id="82-forwardref"><a class="header" href="#82-forwardref">8.2 forwardRef</a></h3>
+<ul>
+<li><strong>因为函数组件没有实例，所以函数组件无法像类组件一样可以接收 ref 属性</strong></li>
+</ul>
+<pre><code class="language-javascript">function Parent() {
+    return (
+        &lt;&gt;
+         // &lt;Child ref={xxx} /&gt; 这样是不行的
+            &lt;Child /&gt;
+            &lt;button&gt;+&lt;/button&gt;
+        &lt;/&gt;
+    )
+}
+</code></pre>
+<ul>
+<li><strong>forwardRef 可以在父组件中操作子组件的 ref 对象</strong></li>
+<li><strong>forwardRef 可以将父组件中的 ref 对象转发到子组件中的 dom 元素上</strong></li>
+<li><strong>子组件接受 props 和 ref 作为参数</strong></li>
+</ul>
+<pre><code class="language-javascript">function Child(props,ref){
+  return (
+    &lt;input type=&quot;text&quot; ref={ref}/&gt;
+  )
+}
+Child = React.forwardRef(Child);
+function Parent(){
+  let [number,setNumber] = useState(0); 
+  // 在使用类组件的时候，创建 ref 返回一个对象，该对象的 current 属性值为空
+  // 只有当它被赋给某个元素的 ref 属性时，才会有值
+  // 所以父组件（类组件）创建一个 ref 对象，然后传递给子组件（类组件），子组件内部有元素使用了
+  // 那么父组件就可以操作子组件中的某个元素
+  // 但是函数组件无法接收 ref 属性 &lt;Child ref={xxx} /&gt; 这样是不行的
+  // 所以就需要用到 forwardRef 进行转发
+  const inputRef = useRef();//{current:''}
+  function getFocus(){
+    inputRef.current.value = 'focus';
+    inputRef.current.focus();
+  }
+  return (
+      &lt;&gt;
+        &lt;Child ref={inputRef}/&gt;
+        &lt;button onClick={()=&gt;setNumber({number:number+1})}&gt;+&lt;/button&gt;
+        &lt;button onClick={getFocus}&gt;获得焦点&lt;/button&gt;
+      &lt;/&gt;
+  )
+}
+</code></pre>
+<h3 id="83-useimperativehandle"><a class="header" href="#83-useimperativehandle">8.3 useImperativeHandle</a></h3>
+<ul>
+<li><code>useImperativeHandle</code>可以让你在使用 ref 时，自定义暴露给父组件的实例值，不能让父组件想干嘛就干嘛</li>
+<li><strong>在大多数情况下，应当避免使用 ref 这样的命令式代码。useImperativeHandle 应当与 forwardRef 一起使用</strong></li>
+<li><strong>父组件可以使用操作子组件中的多个 ref</strong></li>
+</ul>
+<pre><code class="language-javascript">import React,{useState,useEffect,createRef,useRef,forwardRef,useImperativeHandle} from 'react';
+
+function Child(props,parentRef){
+    // 子组件内部自己创建 ref 
+    let focusRef = useRef();
+    let inputRef = useRef();
+    useImperativeHandle(parentRef,()=&gt;(
+      // 这个函数会返回一个对象
+      // 该对象会作为父组件 current 属性的值
+      // 通过这种方式，父组件可以使用操作子组件中的多个 ref
+        return {
+            focusRef,
+            inputRef,
+            name:'计数器',
+            focus(){
+                focusRef.current.focus();
+            },
+            changeText(text){
+                inputRef.current.value = text;
+            }
+        }
+    });
+    return (
+        &lt;&gt;
+            &lt;input ref={focusRef}/&gt;
+            &lt;input ref={inputRef}/&gt;
+        &lt;/&gt;
+    )
+
+}
+Child = forwardRef(Child);
+function Parent(){
+  const parentRef = useRef();//{current:''}
+  function getFocus(){
+    parentRef.current.focus();
+    // 因为子组件中没有定义这个属性，实现了保护，所以这里的代码无效
+    parentRef.current.addNumber(666);
+    parentRef.current.changeText('&lt;script&gt;alert(1)&lt;/script&gt;');
+    console.log(parentRef.current.name);
+  }
+  return (
+      &lt;&gt;
+        &lt;ForwardChild ref={parentRef}/&gt;
+        &lt;button onClick={getFocus}&gt;获得焦点&lt;/button&gt;
+      &lt;/&gt;
+  )
+}
+</code></pre>
+<h2 id="十自定义-hook"><a class="header" href="#十自定义-hook">十、自定义 Hook</a></h2>
+<ul>
+<li>自定义 Hook 更像是一种约定，而不是一种功能。如果函数的名字以 use 开头，并且调用了其他的 Hook，则就称其为一个自定义 Hook</li>
+<li>有时候我们会想要在组件之间重用一些状态逻辑，之前要么用 render props ，要么用高阶组件，要么使用 redux</li>
+<li>自定义 Hook 可以让你在不增加组件的情况下达到同样的目的</li>
+<li><strong>Hook 是一种复用状态逻辑的方式，它不复用 state 本身</strong></li>
+<li><strong>事实上 Hook 的每次调用都有一个完全独立的 state</strong></li>
+</ul>
+<pre><code class="language-javascript">import React, { useLayoutEffect, useEffect, useState } from 'react';
+import ReactDOM from 'react-dom';
+
+function useNumber(){
+  let [number,setNumber] = useState(0);
+  useEffect(()=&gt;{
+    setInterval(()=&gt;{
+        setNumber(number=&gt;number+1);
+    },1000);
+  },[]);
+  return [number,setNumber];
+}
+// 每个组件调用同一个 hook，只是复用 hook 的状态逻辑，并不会共用一个状态
+function Counter1(){
+    let [number,setNumber] = useNumber();
+    return (
+        &lt;div&gt;&lt;button onClick={()=&gt;{
+            setNumber(number+1)
+        }}&gt;{number}&lt;/button&gt;&lt;/div&gt;
+    )
+}
+function Counter2(){
+    let [number,setNumber] = useNumber();
+    return (
+        &lt;div&gt;&lt;button  onClick={()=&gt;{
+            setNumber(number+1)
+        }}&gt;{number}&lt;/button&gt;&lt;/div&gt;
+    )
+}
+ReactDOM.render(&lt;&gt;&lt;Counter1 /&gt;&lt;Counter2 /&gt;&lt;/&gt;, document.getElementById('root'));
+</code></pre>
+<h2 id="十一常见问题"><a class="header" href="#十一常见问题">十一、常见问题</a></h2>
+<h3 id="1-使用-a-hrefhttpswwwnpmjscompackageeslint-plugin-react-hookseslint-plugin-react-hooksa-来检查代码错误给出提示"><a class="header" href="#1-使用-a-hrefhttpswwwnpmjscompackageeslint-plugin-react-hookseslint-plugin-react-hooksa-来检查代码错误给出提示">1. 使用 <a href="https://www.npmjs.com/package/eslint-plugin-react-hooks">eslint-plugin-react-hooks</a> 来检查代码错误，给出提示</a></h3>
+<pre><code class="language-json">{
+  &quot;plugins&quot;: [&quot;react-hooks&quot;],
+  // ...
+  &quot;rules&quot;: {
+    &quot;react-hooks/rules-of-hooks&quot;: 'error',// 检查 Hook 的规则
+    &quot;react-hooks/exhaustive-deps&quot;: 'warn' // 检查 effect 的依赖
+  }
+}
+</code></pre>
+<h3 id="2为什么每次更新的时候都要运行-effect"><a class="header" href="#2为什么每次更新的时候都要运行-effect">2.为什么每次更新的时候都要运行 Effect</a></h3>
+<p><a href="https://react.docschina.org/docs/hooks-effect.html#explanation-why-effects-run-on-each-update">react.docschina.org/docs/hooks-…</a></p>
+<h3 id="3为什么必须在组件的顶层使用-hook--在单个组件中使用多个-state-hook-或-effect-hook那么-react-怎么知道哪个-state-对应哪个-usestate"><a class="header" href="#3为什么必须在组件的顶层使用-hook--在单个组件中使用多个-state-hook-或-effect-hook那么-react-怎么知道哪个-state-对应哪个-usestate">3.为什么必须在组件的顶层使用 Hook &amp; 在单个组件中使用多个 State Hook 或 Effect Hook，那么 React 怎么知道哪个 state 对应哪个 useState？</a></h3>
+<ul>
+<li><strong>React 依赖于 Hook 的调用顺序</strong>，如果能确保 Hook 在每一次渲染中都按照同样的顺序被调用。那么React 能够在多次的 <code>useState</code> 和 <code>useEffect</code>
+调用之间保持 hook 状态的正确性</li>
+</ul>
+<pre><code class="language-javascript">function Form() {
+  // 1. Use the name state variable
+  const [name, setName] = useState('Mary');
+
+  // 2. Use an effect for persisting the form
+  useEffect(function persistForm() {
+    localStorage.setItem('formData', name);
+  });
+
+  // 3. Use the surname state variable
+  const [surname, setSurname] = useState('Poppins');
+
+  // 4. Use an effect for updating the title
+  useEffect(function updateTitle() {
+    document.title = name + ' ' + surname;
+  });
+
+  // ...
+}
+
+// ------------
+// 首次渲染
+// ------------
+useState('Mary')           // 1. 使用 'Mary' 初始化变量名为 name 的 state
+useEffect(persistForm)     // 2. 添加 effect 以保存 form 操作
+useState('Poppins')        // 3. 使用 'Poppins' 初始化变量名为 surname 的 state
+useEffect(updateTitle)     // 4. 添加 effect 以更新标题
+// -------------
+// 二次渲染
+// -------------
+useState('Mary')           // 1. 读取变量名为 name 的 state（参数被忽略）
+useEffect(persistForm)     // 2. 替换保存 form 的 effect
+useState('Poppins')        // 3. 读取变量名为 surname 的 state（参数被忽略）
+useEffect(updateTitle)     // 4. 替换更新标题的 effect
+// ...
+</code></pre>
+<p><strong>只要 Hook 的调用顺序在多次渲染之间保持一致，React 就能正确地将内部 state 和对应的 Hook 进行关联</strong>。但如果我们将一个 Hook (例如 <code>persistForm</code>
+effect) 调用放到一个条件语句中会发生什么呢？</p>
+<pre><code>// 🔴 在条件语句中使用 Hook 违反第一条规则
+  if (name !== '') {
+    useEffect(function persistForm() {
+      localStorage.setItem('formData', name);
+    });
+  }
+</code></pre>
+<p>在第一次渲染中 <code>name !== ''</code> 这个条件值为 <code>true</code>，所以我们会执行这个 Hook。但是下一次渲染时我们可能清空了表单，表达式值变为 <code>false</code>。此时的渲染会跳过该
+Hook，Hook 的调用顺序发生了改变：</p>
+<pre><code class="language-javascript">useState('Mary')           // 1. 读取变量名为 name 的 state（参数被忽略）
+// useEffect(persistForm)  // 🔴 此 Hook 被忽略！
+useState('Poppins')        // 🔴 2 （之前为 3）。读取变量名为 surname 的 state 失败
+useEffect(updateTitle)     // 🔴 3 （之前为 4）。替换更新标题的 effect 失败
+</code></pre>
+<p>React 不知道第二个 <code>useState</code> 的 Hook 应该返回什么。React 会以为在该组件中第二个 Hook 的调用像上次的渲染一样，对应得是 <code>persistForm</code> 的
+effect，但并非如此。从这里开始，后面的 Hook 调用都被提前执行，导致 bug 的产生。</p>
+<p>如果我们想要有条件地执行一个 effect，可以将判断放到 Hook 的_内部_：</p>
+<pre><code class="language-javascript">useEffect(function persistForm() {
+    // 👍 将条件判断放置在 effect 中
+    if (name !== '') {
+      localStorage.setItem('formData', name);
+    }
+  });
+</code></pre>
+<h3 id="4-自定义-hook-必须以-use-开头吗"><a class="header" href="#4-自定义-hook-必须以-use-开头吗">4. <strong>自定义 Hook 必须以 <code>use</code> 开头吗？</strong></a></h3>
+<p>必须如此。这个约定非常重要。不遵循的话，由于无法判断某个函数是否包含对其内部 Hook 的调用，React 将无法自动检查你的 Hook 是否违反了
+<a href="https://react.docschina.org/docs/hooks-rules.html">Hook 的规则</a>。</p>
+<h3 id="5-在两个组件中使用相同的-hook-会共享-state-吗"><a class="header" href="#5-在两个组件中使用相同的-hook-会共享-state-吗">5. <strong>在两个组件中使用相同的 Hook 会共享 state 吗？</strong></a></h3>
+<p>不会。自定义 Hook 是一种重用_状态逻辑_的机制(例如设置为订阅并存储当前值)，所以每次使用自定义 Hook 时，其中的所有 state 和副作用都是完全隔离的。</p>
+<h3 id="6-在一个组件中多次调用-usestate-或者-useeffect每次调用-hook它都会获取独立的-state是完全独立的"><a class="header" href="#6-在一个组件中多次调用-usestate-或者-useeffect每次调用-hook它都会获取独立的-state是完全独立的">6. 在一个组件中多次调用 <code>useState</code> 或者 <code>useEffect</code>，每次调用 Hook，它都会获取独立的 state，是完全独立的</a></h3>
+<h3 id="7-当组件拥有多个-state-时应该把多个-state-合并成一个-state-还是把-state-切分成多个-state-变量"><a class="header" href="#7-当组件拥有多个-state-时应该把多个-state-合并成一个-state-还是把-state-切分成多个-state-变量">7. 当组件拥有多个 state 时，应该把多个 state 合并成一个 state ，还是把 state 切分成多个 state 变量？</a></h3>
+<p><a href="https://react.docschina.org/docs/hooks-faq.html#should-i-use-one-or-many-state-variables">react.docschina.org/docs/hooks-…</a></p>
+<ul>
+<li>要么把所有 state 都放在同一个 <code>useState</code> 调用中，要么每一个字段都对应一个 <code>useState</code> 调用，这两方式都能跑通。</li>
+<li>当你在这<strong>两个极端</strong>之间找到平衡，然后把<strong>相关 state</strong> <strong>组合到几个独立的 state 变量</strong>时，组件就会更加的可读。如果 state 的逻辑开始变得复杂，我们推荐用
+<code>useReducer</code> 来管理它，或使用自定义 Hook。</li>
+</ul>
+<h3 id="8-可以只在更新时运行-effect-吗"><a class="header" href="#8-可以只在更新时运行-effect-吗">8. 可以只在更新时运行 effect 吗？</a></h3>
+<p>这是个比较罕见的使用场景。如果你需要的话，你可以
+<a href="https://react.docschina.org/docs/hooks-faq.html#is-there-something-like-instance-variables">使用一个可变的 ref</a>
+手动存储一个布尔值来表示是首次渲染还是后续渲染，然后在你的 effect 中检查这个标识。（如果你发现自己经常在这么做，你可以为之创建一个自定义 Hook。）</p>
+<h3 id="9-在-useeffect-中调用用函数时要把该函数在-useeffect-中申明不能放到外部申明然后再在-useeffect-中调用"><a class="header" href="#9-在-useeffect-中调用用函数时要把该函数在-useeffect-中申明不能放到外部申明然后再在-useeffect-中调用">9. 在 useEffect 中调用用函数时，要把该函数在 useEffect 中申明，不能放到外部申明，然后再在 useEffect 中调用</a></h3>
+<p><a href="https://react.docschina.org/docs/hooks-faq.html#is-it-safe-to-omit-functions-from-the-list-of-dependencies">react.docschina.org/docs/hooks-…</a></p>
+<pre><code class="language-javascript">function Example({ someProp }) {
+  function doSomething() {
+    console.log(someProp);
+  }
+
+  useEffect(() =&gt; {
+    doSomething();
+  }, []); // 🔴 这样不安全（它调用的 `doSomething` 函数使用了 `someProp`）
+}
+</code></pre>
+<p>要记住 effect 外部的函数使用了哪些 props 和 state 很难。这也是为什么 <strong>通常你会想要在 effect 内部 去声明它所需要的函数。</strong> 这样就能容易的看出那个 effect
+依赖了组件作用域中的哪些值：</p>
+<pre><code class="language-javascript">function Example({ someProp }) {
+  useEffect(() =&gt; {
+    function doSomething() {
+      console.log(someProp);
+    }
+
+    doSomething();
+  }, [someProp]); // ✅ 安全（我们的 effect 仅用到了 `someProp`）
+}
+</code></pre>
+<p><strong>只有</strong> 当函数（以及它所调用的函数）不引用 props、state 以及由它们衍生而来的值时，你才能放心地把它们从依赖列表中省略。下面这个案例有一个 Bug：</p>
+<pre><code class="language-javascript">function ProductPage({ productId }) {
+  const [product, setProduct] = useState(null);
+  async function fetchProduct() {
+    const response = await fetch('http://myapi/product' + productId); // 使用了 productId prop
+    const json = await response.json();
+    setProduct(json);
+  }
+  useEffect(() =&gt; {
+    fetchProduct();
+  }, []); // 🔴 这样是无效的，因为 `fetchProduct` 使用了 `productId`
+  // ...
+}
+</code></pre>
+<p><strong>推荐的修复方案是把那个函数移动到你的 effect 内部</strong>。这样就能很容易的看出来你的 effect 使用了哪些 props 和 state，并确保它们都被声明了：</p>
+<pre><code class="language-javascript">function ProductPage({ productId }) {
+  const [product, setProduct] = useState(null);
+  useEffect(() =&gt; {
+    // 把这个函数移动到 effect 内部后，我们可以清楚地看到它用到的值。
+    async function fetchProduct() {
+      const response = await fetch('http://myapi/product' + productId);
+      const json = await response.json();
+      setProduct(json);
+    }
+    fetchProduct();
+  }, [productId]); // ✅ 有效，因为我们的 effect 只用到了 productId
+  // ...
+}
+</code></pre>
+<h3 id="10-如何在-hooks-中优雅的-fetch-data"><a class="header" href="#10-如何在-hooks-中优雅的-fetch-data">10. 如何在 Hooks 中优雅的 Fetch Data</a></h3>
+<p><a href="https://www.robinwieruch.de/react-hooks-fetch-data/">www.robinwieruch.de/react-hooks…</a></p>
+<p><a href="https://codesandbox.io/s/jvvkoo8pq3">codesandbox.io/s/jvvkoo8pq…</a></p>
+<pre><code class="language-javascript">import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+function App() {
+  const [data, setData] = useState({ hits: [] });
+  // 注意 async 的位置
+  // 这种写法，虽然可以运行，但是会发出警告
+  // 每个带有 async 修饰的函数都返回一个隐含的 promise
+  // 但是 useEffect 函数有要求：要么返回清除副作用函数，要么就不返回任何内容
+  useEffect(async () =&gt; {
+    const result = await axios(
+      'https://hn.algolia.com/api/v1/search?query=redux',
+    );
+    setData(result.data);
+  }, []);
+  return (
+    &lt;ul&gt;
+      {data.hits.map(item =&gt; (
+        &lt;li key={item.objectID}&gt;
+          &lt;a href={item.url}&gt;{item.title}&lt;/a&gt;
+        &lt;/li&gt;
+      ))}
+    &lt;/ul&gt;
+  );
+}
+export default App;
+
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+function App() {
+  const [data, setData] = useState({ hits: [] });
+  useEffect(() =&gt; {
+    // 更优雅的方式
+    const fetchData = async () =&gt; {
+      const result = await axios(
+        'https://hn.algolia.com/api/v1/search?query=redux',
+      );
+      setData(result.data);
+    };
+    fetchData();
+  }, []);
+  return (
+    &lt;ul&gt;
+      {data.hits.map(item =&gt; (
+        &lt;li key={item.objectID}&gt;
+          &lt;a href={item.url}&gt;{item.title}&lt;/a&gt;
+        &lt;/li&gt;
+      ))}
+    &lt;/ul&gt;
+  );
+}
+export default App;
+</code></pre>
+<h3 id="11-不要过度依赖-usememo"><a class="header" href="#11-不要过度依赖-usememo">11. 不要过度依赖 useMemo</a></h3>
+<ul>
+<li>
+<p><code>useMemo</code> 本身也有开销。<code>useMemo</code> 会「记住」一些值，同时在后续 render
+时，将依赖数组中的值取出来和上一次记录的值进行比较，如果不相等才会重新执行回调函数，否则直接返回「记住」的值。这个过程本身就会消耗一定的内存和计算资源。因此，过度使用 <code>useMemo</code>
+可能会影响程序的性能。</p>
+</li>
+<li>
+<p>在使用<code>useMemo</code> 前，应该先思考三个问题：</p>
+<ul>
+<li><strong>传递给 <code>useMemo</code> 的函数开销大不大？</strong> 有些计算开销很大，我们就需要「记住」它的返回值，避免每次 render
+都去重新计算。如果你执行的操作开销不大，那么就不需要记住返回值。否则，使用 <code>useMemo</code> 本身的开销就可能超过重新计算这个值的开销。因此，对于一些简单的 JS 运算来说，我们不需要使用
+<code>useMemo</code> 来「记住」它的返回值。</li>
+<li><strong>返回的值是原始值吗？</strong> 如果计算出来的是<strong>基本类型</strong>的值（<code>string</code>、 <code>boolean</code> 、<code>null</code>、<code>undefined</code>
+、<code>number</code>、<code>symbol</code>），那么每次比较都是相等的，下游组件就不会重新渲染；如果计算出来的是<strong>复杂类型</strong>的值（<code>object</code>、<code>array</code>），哪怕值不变，但是地址会发生变化，导致下游组件重新渲染。所以我们也需要「记住」这个值。</li>
+<li><strong>在编写自定义 Hook 时，返回值一定要保持引用的一致性。</strong> 因为你无法确定外部要如何使用它的返回值。如果返回值被用做其他 Hook 的依赖，并且每次 re-render
+时引用不一致（当值相等的情况），就可能会产生 bug。所以如果自定义 Hook 中暴露出来的值是 object、array、函数等，都应该使用 <code>useMemo</code>
+。以确保当值相同时，引用不发生变化。</li>
+</ul>
+</li>
+</ul>
+<h3 id="12-useeffect-不能接收-async-作为回调函数"><a class="header" href="#12-useeffect-不能接收-async-作为回调函数">12. useEffect 不能接收 async 作为回调函数</a></h3>
+<p>useEffect 接收的函数，要么返回一个能清除副作用的函数，要么就不返回任何内容。而 async 返回的是 promise。</p>
+<p><a href="https://www.robinwieruch.de/react-hooks-fetch-data">www.robinwieruch.de/react-hooks…</a></p>
+<p><img src="./images/useEffect_async.png" alt="image.png" /></p>
+<h2 id="十二项目实战"><a class="header" href="#十二项目实战">十二、项目实战</a></h2>
+<p><a href="https://github.com/yjdjiayou/react-hooks-qunar-demo"><strong>React Hooks 项目</strong></a></p>
+<h2 id="十三参考"><a class="header" href="#十三参考">十三、参考</a></h2>
+<p><strong><a href="https://react.docschina.org/docs/hooks-faq.html">官方提供的问题列表</a></strong></p>
+<p><strong><a href="https://reactjs.org/docs/hooks-rules.html#explanation">React 使用规则</a></strong></p>
+<p><strong><a href="https://juejin.im/post/6844903958968795149">React Hooks 你真的用对了吗？</a></strong></p>
+<p><strong><a href="https://github.com/streamich/react-use">大量自定义 hooks 的</a>
+<a href="https://github.com/streamich/react-use">仓库</a></strong></p>
+<p><strong><a href="https://juejin.im/post/6844903861434449933">从 Preact 中了解 React 组件和 hooks 基本原理表</a></strong></p>
+<p><strong><a href="https://juejin.im/post/6844903918577664007">2019年了，整理了N个实用案例帮你快速迁移到React Hooks</a></strong></p>
+<h2 id="十四推荐阅读"><a class="header" href="#十四推荐阅读">十四、推荐阅读</a></h2>
+<p><a href="https://juejin.im/post/6844904021233238024"><strong>你真的了解 React 生命周期吗</strong></a></p>
+<p><strong><a href="https://juejin.im/post/6844904017487724557">React SSR 详解【近 1W 字】+ 2个项目实战</a></strong></p>
+<p><strong><a href="https://juejin.im/post/6844903966849892359">从 0 到 1 实现一款简易版 Webpack</a></strong></p>
+<p><strong><a href="https://juejin.im/post/6844904023791796237">Webpack 设置环境变量的误区</a></strong></p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                                                    <a rel="prev" href="../React/React事件机制.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+                        
+                                                    <a rel="next" href="../Vue/Vuex简单源码.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+                        
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                                    <a rel="prev" href="../React/React事件机制.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+                
+                                    <a rel="next" href="../Vue/Vuex简单源码.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+                            </nav>
+
+        </div>
+
+        
+        
+        
+                <script type="text/javascript">
+            window.playground_copyable = true;
+        </script>
+        
+        
+                <script src="../elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../searcher.js" type="text/javascript" charset="utf-8"></script>
+        
+        <script src="../clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+        
+        
+    </body>
+</html>
