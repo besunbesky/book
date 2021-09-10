@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>Vuex简单源码 - Rainning in the utopia</title>
+        <title>异步更新队列 - Rainning in the utopia</title>
                 
 
         <!-- Custom HTML head -->
@@ -83,7 +83,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded affix "><a href="../index.html">概述</a></li><li class="spacer"></li><li class="chapter-item expanded affix "><li class="part-title">JavaScript</li><li class="chapter-item expanded "><div><strong aria-hidden="true">1.</strong> 基础</div></li><li><ol class="section"><li class="chapter-item expanded "><a href="../JavaScript/作用域和闭包.html"><strong aria-hidden="true">1.1.</strong> 作用域和闭包</a></li><li class="chapter-item expanded "><a href="../JavaScript/JS变量.html"><strong aria-hidden="true">1.2.</strong> JS变量</a></li><li class="chapter-item expanded "><a href="../JavaScript/防抖和节流.html"><strong aria-hidden="true">1.3.</strong> 防抖和节流</a></li></ol></li><li class="chapter-item expanded "><div><strong aria-hidden="true">2.</strong> 进阶</div></li><li><ol class="section"><li class="chapter-item expanded "><a href="../JavaScript/函数相关（compose，pip，memoize，curry，偏函数）.html"><strong aria-hidden="true">2.1.</strong> 函数相关（compose，pip，memoize，curry，偏函数）</a></li></ol></li><li class="chapter-item expanded "><li class="part-title">CSS</li><li class="chapter-item expanded "><div><strong aria-hidden="true">3.</strong> 基础</div></li><li><ol class="section"><li class="chapter-item expanded "><a href="../CSS/居中布局.html"><strong aria-hidden="true">3.1.</strong> 居中布局的几种方式</a></li></ol></li><li class="chapter-item expanded "><li class="part-title">React</li><li class="chapter-item expanded "><div><strong aria-hidden="true">4.</strong> 虚拟DOM</div></li><li><ol class="section"><li class="chapter-item expanded "><a href="../React/虚拟DOM.html"><strong aria-hidden="true">4.1.</strong> 虚拟DOM</a></li><li class="chapter-item expanded "><a href="../React/手动实现一个虚拟DOM.html"><strong aria-hidden="true">4.2.</strong> 手动实现一个虚拟DOM</a></li></ol></li><li class="chapter-item expanded "><div><strong aria-hidden="true">5.</strong> React事件</div></li><li><ol class="section"><li class="chapter-item expanded "><a href="../React/React事件简单记录.html"><strong aria-hidden="true">5.1.</strong> 简单记录</a></li><li class="chapter-item expanded "><a href="../React/React事件机制.html"><strong aria-hidden="true">5.2.</strong> React事件机制源码简单分析</a></li></ol></li><li class="chapter-item expanded "><div><strong aria-hidden="true">6.</strong> Hooks</div></li><li><ol class="section"><li class="chapter-item expanded "><a href="../React/ReactHooks详解.html"><strong aria-hidden="true">6.1.</strong> React Hooks 详解</a></li></ol></li><li class="chapter-item expanded "><li class="part-title">Vue</li><li class="chapter-item expanded "><div><strong aria-hidden="true">7.</strong> Vue</div></li><li><ol class="section"><li class="chapter-item expanded "><a href="../Vue/Vue2.x响应式原理简单解析.html"><strong aria-hidden="true">7.1.</strong> Vue2.x 响应式原理简单解析</a></li><li class="chapter-item expanded "><a href="../Vue/异步更新队列.html"><strong aria-hidden="true">7.2.</strong> 异步更新队列</a></li><li class="chapter-item expanded "><a href="../Vue/computed,watch,watchEffect.html"><strong aria-hidden="true">7.3.</strong> computed,watch,watchEffect</a></li></ol></li><li class="chapter-item expanded "><div><strong aria-hidden="true">8.</strong> Vuex</div></li><li><ol class="section"><li class="chapter-item expanded "><a href="../Vue/Vuex简单源码.html" class="active"><strong aria-hidden="true">8.1.</strong> Vuex简单源码</a></li></ol></li><li class="chapter-item expanded "><li class="part-title">网络</li><li class="chapter-item expanded "><div><strong aria-hidden="true">9.</strong> 网络基础</div></li><li class="chapter-item expanded "><div><strong aria-hidden="true">10.</strong> 扩展阅读</div></li><li><ol class="section"><li class="chapter-item expanded "><a href="../Network/HTTP2.0_&_HTTP3.0.html"><strong aria-hidden="true">10.1.</strong> HTTP2.0 &amp; HTTP3.0</a></li><li class="spacer"></li></ol></li></ol>            </div>
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="../index.html">概述</a></li><li class="spacer"></li><li class="chapter-item expanded affix "><li class="part-title">JavaScript</li><li class="chapter-item expanded "><div><strong aria-hidden="true">1.</strong> 基础</div></li><li><ol class="section"><li class="chapter-item expanded "><a href="../JavaScript/作用域和闭包.html"><strong aria-hidden="true">1.1.</strong> 作用域和闭包</a></li><li class="chapter-item expanded "><a href="../JavaScript/JS变量.html"><strong aria-hidden="true">1.2.</strong> JS变量</a></li><li class="chapter-item expanded "><a href="../JavaScript/防抖和节流.html"><strong aria-hidden="true">1.3.</strong> 防抖和节流</a></li></ol></li><li class="chapter-item expanded "><div><strong aria-hidden="true">2.</strong> 进阶</div></li><li><ol class="section"><li class="chapter-item expanded "><a href="../JavaScript/函数相关（compose，pip，memoize，curry，偏函数）.html"><strong aria-hidden="true">2.1.</strong> 函数相关（compose，pip，memoize，curry，偏函数）</a></li></ol></li><li class="chapter-item expanded "><li class="part-title">CSS</li><li class="chapter-item expanded "><div><strong aria-hidden="true">3.</strong> 基础</div></li><li><ol class="section"><li class="chapter-item expanded "><a href="../CSS/居中布局.html"><strong aria-hidden="true">3.1.</strong> 居中布局的几种方式</a></li></ol></li><li class="chapter-item expanded "><li class="part-title">React</li><li class="chapter-item expanded "><div><strong aria-hidden="true">4.</strong> 虚拟DOM</div></li><li><ol class="section"><li class="chapter-item expanded "><a href="../React/虚拟DOM.html"><strong aria-hidden="true">4.1.</strong> 虚拟DOM</a></li><li class="chapter-item expanded "><a href="../React/手动实现一个虚拟DOM.html"><strong aria-hidden="true">4.2.</strong> 手动实现一个虚拟DOM</a></li></ol></li><li class="chapter-item expanded "><div><strong aria-hidden="true">5.</strong> React事件</div></li><li><ol class="section"><li class="chapter-item expanded "><a href="../React/React事件简单记录.html"><strong aria-hidden="true">5.1.</strong> 简单记录</a></li><li class="chapter-item expanded "><a href="../React/React事件机制.html"><strong aria-hidden="true">5.2.</strong> React事件机制源码简单分析</a></li></ol></li><li class="chapter-item expanded "><div><strong aria-hidden="true">6.</strong> Hooks</div></li><li><ol class="section"><li class="chapter-item expanded "><a href="../React/ReactHooks详解.html"><strong aria-hidden="true">6.1.</strong> React Hooks 详解</a></li></ol></li><li class="chapter-item expanded "><li class="part-title">Vue</li><li class="chapter-item expanded "><div><strong aria-hidden="true">7.</strong> Vue</div></li><li><ol class="section"><li class="chapter-item expanded "><a href="../Vue/Vue2.x响应式原理简单解析.html"><strong aria-hidden="true">7.1.</strong> Vue2.x 响应式原理简单解析</a></li><li class="chapter-item expanded "><a href="../Vue/异步更新队列.html" class="active"><strong aria-hidden="true">7.2.</strong> 异步更新队列</a></li><li class="chapter-item expanded "><a href="../Vue/computed,watch,watchEffect.html"><strong aria-hidden="true">7.3.</strong> computed,watch,watchEffect</a></li></ol></li><li class="chapter-item expanded "><div><strong aria-hidden="true">8.</strong> Vuex</div></li><li><ol class="section"><li class="chapter-item expanded "><a href="../Vue/Vuex简单源码.html"><strong aria-hidden="true">8.1.</strong> Vuex简单源码</a></li></ol></li><li class="chapter-item expanded "><li class="part-title">网络</li><li class="chapter-item expanded "><div><strong aria-hidden="true">9.</strong> 网络基础</div></li><li class="chapter-item expanded "><div><strong aria-hidden="true">10.</strong> 扩展阅读</div></li><li><ol class="section"><li class="chapter-item expanded "><a href="../Network/HTTP2.0_&_HTTP3.0.html"><strong aria-hidden="true">10.1.</strong> HTTP2.0 &amp; HTTP3.0</a></li><li class="spacer"></li></ol></li></ol>            </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
 
@@ -144,180 +144,216 @@
 
                 <div id="content" class="content">
                     <main>
-                        <p>先把之前写过的vue的响应式原理里的代码略加修改搬过来</p>
-<pre><code class="language-javascript">/* eslint-disable no-unused-vars */
-// let x;
-// let y;
-// let f = n =&gt; n * 100 + 100;
+                        <h1 id="异步更新队列"><a class="header" href="#异步更新队列">异步更新队列</a></h1>
+<p>在上面Vue2.x响应式原理的代码里还是有点问题的。</p>
+<p>先捞一遍代码：</p>
+<pre><code class="language-javascript">let x;
+
+let f = function (v) {
+  return v * 100;
+}
 
 let active;
 
-let watch = function (cb) {
+const onXChange = (cb) =&gt; {
   active = cb;
   active();
   active = null;
-};
-
-let queue = [];
-let nextTick = cb =&gt; Promise.resolve().then(cb);
-let queueJob = job =&gt; {
-  if (!queue.includes(job)) {
-    queue.push(job);
-    nextTick(flushJobs);
-  }
-};
-let flushJobs = () =&gt; {
-  let job;
-  while ((job = queue.shift()) !== undefined) {
-    job();
-  }
-};
-
+}
 class Dep {
-  constructor() {
-    this.deps = new Set();
-  }
+  deps = new Set();
   depend() {
     if (active) {
       this.deps.add(active);
     }
   }
   notify() {
+    this.deps.forEach(dep =&gt; dep());
+  }
+}
+
+const ref = (value) =&gt; {
+  let initValue = value;
+  let deps = new Dep();
+
+  return Object.defineProperty({}, &quot;value&quot;, {
+    get() {
+      deps.depend();
+      return initValue;
+    },
+    set(newVal) {
+      initValue = newVal;
+      deps.notify();
+    }
+  })
+}
+
+x = ref(1);
+
+onXChange(() =&gt; {
+  console.log(f(x.value));
+})
+
+x.value = 2;
+x.value = 3;
+</code></pre>
+<h2 id="依赖多个变量的情况下的性能问题"><a class="header" href="#依赖多个变量的情况下的性能问题">依赖多个变量的情况下的性能问题</a></h2>
+<p>简单删减一波，然后让模板依赖于三个变量：</p>
+<pre><code class="language-javascript">let active;
+
+const watch = (cb) =&gt; {
+  active = cb;
+  active();
+  active = null;
+}
+class Dep {
+  deps = new Set();
+  depend() {
+    if (active) {
+      this.deps.add(active);
+    }
+  }
+  notify() {
+    this.deps.forEach(dep =&gt; dep());
+  }
+}
+
+const ref = (value) =&gt; {
+  let initValue = value;
+  let deps = new Dep();
+
+  return Object.defineProperty({}, &quot;value&quot;, {
+    get() {
+      deps.depend();
+      return initValue;
+    },
+    set(newVal) {
+      initValue = newVal;
+      deps.notify();
+    }
+  })
+}
+
+let x = ref(1);
+let y = ref(2);
+let z = ref(3)
+
+watch(() =&gt; {
+  let str = `${x.value} --- ${y.value} --- ${z.value}`
+  document.write(str);
+  console.log(str)
+})
+
+x.value = 2;
+y.value = 3;
+z.value = 3;
+</code></pre>
+<p>打开控制台你会发现，每一次值变化的时候，都会触发一次<code>onXChange</code>。</p>
+<p>那么问题来了。如果在一个函数中，修改了多个变量，那岂不是页面就要进行多次渲染吗？那么性能肯定下降了。</p>
+<p>那么这怎么办呢。</p>
+<h2 id="异步更新队列-1"><a class="header" href="#异步更新队列-1">异步更新队列</a></h2>
+<p>那么就得用到异步更新队列了。</p>
+<p>我们知道JavaScript有宏任务和微任务。所有的微任务都是在宏任务执行完成之后再执行的。</p>
+<p>那么我们可以定义一个<code>nextTick</code>函数，用来在宏任务执行完成之后执行微任务。 即，在所有的赋值完成之后，再执行<code>onChange</code>方法。</p>
+<pre><code class="language-javascript">const netxtTick = cb =&gt; Promise.resolve().then(cb);
+</code></pre>
+<p>我们还需要一个队列用来保证先进来的<code>onChange</code>先执行：</p>
+<pre><code class="language-javascript">let queue = [];
+// 增加任务的方法
+let queueJob = job =&gt; {
+  // 如果任务已经被添加过，则不添加了
+  if (!queue.includes(job)) {
+    queue.push(job);
+    // 在微任务中执行所有回调
+    nextTick(flushJobs);
+  }
+}
+// 执行任务的方法
+let flushJobs = () =&gt; {
+  let job;
+  // 如果队列中第一个始终有任务，则取出来执行
+  while ((job = queue.shift()) !== undefined) {
+    job();
+  }
+}
+</code></pre>
+<p>整体代码如下：</p>
+<pre><code class="language-javascript">let active;
+
+const watch = (cb) =&gt; {
+  active = cb;
+  active();
+  active = null;
+}
+
+let nextTick = cb =&gt; Promise.resolve().then(cb)
+
+let queue = [];
+let queueJob = job =&gt; {
+  if (!queue.includes(job)) {
+    queue.push(job);
+    nextTick(flushJobs);
+  }
+}
+let flushJobs = () =&gt; {
+  let job;
+  while ((job = queue.shift()) !== undefined) {
+    job();
+  }
+}
+class Dep {
+  deps = new Set();
+  depend() {
+    if (active) {
+      this.deps.add(active);
+    }
+  }
+  notify() {
+    // 注意notify内部变更了
     this.deps.forEach(dep =&gt; queueJob(dep));
   }
 }
 
-let ref = initValue =&gt; {
-  let value = initValue;
-  let dep = new Dep();
+const ref = (value) =&gt; {
+  let initValue = value;
+  let deps = new Dep();
 
   return Object.defineProperty({}, &quot;value&quot;, {
     get() {
-      dep.depend();
-      return value;
+      deps.depend();
+      return initValue;
     },
-    set(newValue) {
-      value = newValue;
-      dep.notify();
+    set(newVal) {
+      initValue = newVal;
+      deps.notify();
     }
-  });
-};
-
-let createReactive = (target, prop, value) =&gt; {
-  let dep = new Dep();
-
-  // return new Proxy(target, {
-  //   get(target, prop) {
-  //     dep.depend();
-  //     return Reflect.get(target, prop);
-  //   },
-  //   set(target, prop, value) {
-  //     Reflect.set(target, prop, value);
-  //     dep.notify();
-  //   },
-  // });
-
-  return Object.defineProperty(target, prop, {
-    get() {
-      dep.depend();
-      return value;
-    },
-    set(newValue) {
-      value = newValue;
-      dep.notify();
-    }
-  });
-};
-
-export let reactive = obj =&gt; {
-  let dep = new Dep();
-
-  Object.keys(obj).forEach(key =&gt; {
-    let value = obj[key];
-    createReactive(obj, key, value);
-  });
-
-  return obj;
-};
-
-// let data = reacitve({
-//   count: 0
-// });
-
-import { Store } from &quot;./vuex&quot;;
-
-let store = new Store({
-  state: {
-    count: 0
-  },
-  mutations: {
-    addCount(state, payload) {
-      state.count += payload || 1;
-    }
-  },
-  plugins: [
-    store =&gt;
-      store.subscribe((mutation, state) =&gt; {
-        console.log(mutation);
-      })
-  ]
-});
-
-document.getElementById(&quot;add&quot;).addEventListener(&quot;click&quot;, function () {
-  // data.count++;
-  store.commit(&quot;addCount&quot;, 1);
-});
-let str;
-watch(() =&gt; {
-  str = `hello ${store.state.count}`;
-  document.getElementById(&quot;app&quot;).innerText = str;
-});
-</code></pre>
-<p>vuex其实也就是在构造过程中调用了vue的reactive来包裹自己的state来使得state变为响应式的。</p>
-<pre><code class="language-javascript">import { reactive } from './myVue';
-
-export class Store {
-
-  constructor(options = {}) {
-    let { state, mutations, plugins } = options;
-    this._vm = reactive(state);
-    this._mutations = mutations;
-
-    this._subscribe = [];
-    plugins.forEach(plugin =&gt; plugin(this));
-  }
-
-  get state() {
-    return this._vm;
-  }
-
-  commit(type, payload) {
-    const entry = this._mutations[type];
-    if (!entry) {
-      return;
-    }
-    entry(this.state, payload);
-    this._subscribe.forEach(fn =&gt; fn({ type, payload }, this.state));
-  }
-
-  subscribe(fn) {
-    if (!this._subscribe.includes(fn)) {
-      this._subscribe.push(fn);
-    }
-  }
-
+  })
 }
+
+let x = ref(1);
+let y = ref(2);
+let z = ref(3)
+
+watch(() =&gt; {
+  let str = `${x.value} --- ${y.value} --- ${z.value}`
+  document.write(str);
+  console.log(str)
+})
+
+x.value = 2;
+y.value = 3;
+z.value = 3;
 </code></pre>
 
                     </main>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
-                                                    <a rel="prev" href="../Vue/computed,watch,watchEffect.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                                    <a rel="prev" href="../Vue/Vue2.x响应式原理简单解析.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                                 <i class="fa fa-angle-left"></i>
                             </a>
                         
-                                                    <a rel="next" href="../Network/HTTP2.0_&amp;_HTTP3.0.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                                    <a rel="next" href="../Vue/computed,watch,watchEffect.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                                 <i class="fa fa-angle-right"></i>
                             </a>
                         
@@ -327,11 +363,11 @@ export class Store {
             </div>
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
-                                    <a rel="prev" href="../Vue/computed,watch,watchEffect.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                    <a rel="prev" href="../Vue/Vue2.x响应式原理简单解析.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                         <i class="fa fa-angle-left"></i>
                     </a>
                 
-                                    <a rel="next" href="../Network/HTTP2.0_&amp;_HTTP3.0.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                    <a rel="next" href="../Vue/computed,watch,watchEffect.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                         <i class="fa fa-angle-right"></i>
                     </a>
                             </nav>

@@ -1,0 +1,391 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN" class="sidebar-visible no-js light">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Vue2.x 响应式原理简单解析 - Rainning in the utopia</title>
+                
+
+        <!-- Custom HTML head -->
+        
+
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+                <link rel="icon" href="../favicon.svg">
+                        <link rel="shortcut icon" href="../favicon.png">
+                <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+                <link rel="stylesheet" href="../css/print.css" media="print">
+        
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../highlight.css">
+        <link rel="stylesheet" href="../tomorrow-night.css">
+        <link rel="stylesheet" href="../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        
+                <!-- MathJax -->
+        <script async type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+            </head>
+    <body>
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="../index.html">概述</a></li><li class="spacer"></li><li class="chapter-item expanded affix "><li class="part-title">JavaScript</li><li class="chapter-item expanded "><div><strong aria-hidden="true">1.</strong> 基础</div></li><li><ol class="section"><li class="chapter-item expanded "><a href="../JavaScript/作用域和闭包.html"><strong aria-hidden="true">1.1.</strong> 作用域和闭包</a></li><li class="chapter-item expanded "><a href="../JavaScript/JS变量.html"><strong aria-hidden="true">1.2.</strong> JS变量</a></li><li class="chapter-item expanded "><a href="../JavaScript/防抖和节流.html"><strong aria-hidden="true">1.3.</strong> 防抖和节流</a></li></ol></li><li class="chapter-item expanded "><div><strong aria-hidden="true">2.</strong> 进阶</div></li><li><ol class="section"><li class="chapter-item expanded "><a href="../JavaScript/函数相关（compose，pip，memoize，curry，偏函数）.html"><strong aria-hidden="true">2.1.</strong> 函数相关（compose，pip，memoize，curry，偏函数）</a></li></ol></li><li class="chapter-item expanded "><li class="part-title">CSS</li><li class="chapter-item expanded "><div><strong aria-hidden="true">3.</strong> 基础</div></li><li><ol class="section"><li class="chapter-item expanded "><a href="../CSS/居中布局.html"><strong aria-hidden="true">3.1.</strong> 居中布局的几种方式</a></li></ol></li><li class="chapter-item expanded "><li class="part-title">React</li><li class="chapter-item expanded "><div><strong aria-hidden="true">4.</strong> 虚拟DOM</div></li><li><ol class="section"><li class="chapter-item expanded "><a href="../React/虚拟DOM.html"><strong aria-hidden="true">4.1.</strong> 虚拟DOM</a></li><li class="chapter-item expanded "><a href="../React/手动实现一个虚拟DOM.html"><strong aria-hidden="true">4.2.</strong> 手动实现一个虚拟DOM</a></li></ol></li><li class="chapter-item expanded "><div><strong aria-hidden="true">5.</strong> React事件</div></li><li><ol class="section"><li class="chapter-item expanded "><a href="../React/React事件简单记录.html"><strong aria-hidden="true">5.1.</strong> 简单记录</a></li><li class="chapter-item expanded "><a href="../React/React事件机制.html"><strong aria-hidden="true">5.2.</strong> React事件机制源码简单分析</a></li></ol></li><li class="chapter-item expanded "><div><strong aria-hidden="true">6.</strong> Hooks</div></li><li><ol class="section"><li class="chapter-item expanded "><a href="../React/ReactHooks详解.html"><strong aria-hidden="true">6.1.</strong> React Hooks 详解</a></li></ol></li><li class="chapter-item expanded "><li class="part-title">Vue</li><li class="chapter-item expanded "><div><strong aria-hidden="true">7.</strong> Vue</div></li><li><ol class="section"><li class="chapter-item expanded "><a href="../Vue/Vue2.x响应式原理简单解析.html" class="active"><strong aria-hidden="true">7.1.</strong> Vue2.x 响应式原理简单解析</a></li><li class="chapter-item expanded "><a href="../Vue/异步更新队列.html"><strong aria-hidden="true">7.2.</strong> 异步更新队列</a></li><li class="chapter-item expanded "><a href="../Vue/computed,watch,watchEffect.html"><strong aria-hidden="true">7.3.</strong> computed,watch,watchEffect</a></li></ol></li><li class="chapter-item expanded "><div><strong aria-hidden="true">8.</strong> Vuex</div></li><li><ol class="section"><li class="chapter-item expanded "><a href="../Vue/Vuex简单源码.html"><strong aria-hidden="true">8.1.</strong> Vuex简单源码</a></li></ol></li><li class="chapter-item expanded "><li class="part-title">网络</li><li class="chapter-item expanded "><div><strong aria-hidden="true">9.</strong> 网络基础</div></li><li class="chapter-item expanded "><div><strong aria-hidden="true">10.</strong> 扩展阅读</div></li><li><ol class="section"><li class="chapter-item expanded "><a href="../Network/HTTP2.0_&_HTTP3.0.html"><strong aria-hidden="true">10.1.</strong> HTTP2.0 &amp; HTTP3.0</a></li><li class="spacer"></li></ol></li></ol>            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                                                <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                                            </div>
+
+                    <h1 class="menu-title">Rainning in the utopia</h1>
+
+                    <div class="right-buttons">
+                                                <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                                                                        
+                    </div>
+                </div>
+
+                                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+                
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="vue2x-响应式原理"><a class="header" href="#vue2x-响应式原理">Vue2.x 响应式原理</a></h1>
+<p>众所周知，Vue2.x是基于Object.defineProperty()来实现响应式的。</p>
+<p>那么，defineProperty是啥呢。</p>
+<p>先附上MDN的连接<a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Object/defineProperty">Object.defineProperty()</a></p>
+<h2 id="objectdefineproperty"><a class="header" href="#objectdefineproperty">Object.defineProperty</a></h2>
+<p>引用MDN的原话：</p>
+<blockquote>
+<p><code>Object.defineProperty()</code>方法会直接在一个对象上定义一个新属性，或者修改一个对象的现有属性，并返回此对象。</p>
+</blockquote>
+<p>那么重点有两个：</p>
+<ol>
+<li>对象</li>
+<li>定义新属性或修改现有属性</li>
+</ol>
+<p>那么什么叫<code>定义新属性或修改现有属性</code>呢？</p>
+<p>我们来看看另外一个概念<code>属性描述符</code></p>
+<h2 id="属性描述符"><a class="header" href="#属性描述符">属性描述符</a></h2>
+<h3 id="描述符的介绍"><a class="header" href="#描述符的介绍">描述符的介绍</a></h3>
+<p>对象里目前存在的属性描述符有两种主要形式：</p>
+<ul>
+<li>数据描述符：具有值的属性，该值可以是可写的，也可以是不可写的。</li>
+<li>存取描述符：由getter和setter函数描述的属性。</li>
+</ul>
+<p>一个描述符只可能是二者之一，不可能同时是两者。即二选一。</p>
+<p>上述两种描述符都是对象，共享以下可选键值。（默认值是指在使用 <code>Object.defineProperty()</code> 定义属性时的默认值）</p>
+<table><thead><tr><th>键值</th><th>描述</th><th>默认值</th></tr></thead><tbody>
+<tr><td>configurable</td><td>当且仅当该属性的 <code>configurable</code> 键值为 <code>true</code> 时，该属性的描述符才能够被改变，同时该属性也能从对应的对象上被删除。</td><td>false</td></tr>
+<tr><td>enumerable</td><td>当且仅当该属性的 <code>enumerable</code> 键值为 <code>true</code> 时，该属性才会出现在对象的枚举属性中。</td><td>false</td></tr>
+<tr><td>value</td><td>该属性对应的值。可以是任何有效的 JavaScript 值（数值，对象，函数等）。</td><td>undefined</td></tr>
+<tr><td>writable</td><td>当且仅当该属性的 <code>writable</code> 键值为 <code>true</code> 时，属性的值，也就是上面的 <code>value</code>，才能被赋值。</td><td>false</td></tr>
+</tbody></table>
+<blockquote>
+<p>因为<code>enumerable</code>属性默认是false，所以通过<code>Object.defineProperty()</code>定义的属性都是不会被<code>for...in</code>和<code>Object.keys</code>访问到。</p>
+</blockquote>
+<p>以下是存取描述符独有的：</p>
+<table><thead><tr><th>键值</th><th>描述</th><th>默认值</th></tr></thead><tbody>
+<tr><td>get</td><td>属性的 getter 函数，如果没有 getter，则为 <code>undefined</code>。当访问该属性时，会调用此函数。执行时不传入任何参数，但是会传入 <code>this</code> 对象（由于继承关系，这里的<code>this</code>并不一定是定义该属性的对象）。该函数的返回值会被用作属性的值。</td><td>undefined</td></tr>
+<tr><td>get</td><td>属性的 setter 函数，如果没有 setter，则为 <code>undefined</code>。当属性值被修改时，会调用此函数。该方法接受一个参数（也就是被赋予的新值），会传入赋值时的 <code>this</code> 对象。</td><td>undefined</td></tr>
+</tbody></table>
+<p>可以看到，跟值相关的，默认值都是undefined。跟<code>able</code>相关的，默认值都是false。</p>
+<h3 id="怎么区分描述符呢"><a class="header" href="#怎么区分描述符呢">怎么区分描述符呢？</a></h3>
+<table><thead><tr><th align="center"></th><th align="center">configurable</th><th align="center">enumerable</th><th align="center">value</th><th align="center">writable</th><th align="center">get</th><th align="center">set</th></tr></thead><tbody>
+<tr><td align="center">数据描述符</td><td align="center">√</td><td align="center">√</td><td align="center">√</td><td align="center">√</td><td align="center">×</td><td align="center">×</td></tr>
+<tr><td align="center">存取描述符</td><td align="center">√</td><td align="center">√</td><td align="center">×</td><td align="center">×</td><td align="center">√</td><td align="center">√</td></tr>
+</tbody></table>
+<p>如果一个描述符不具有 <code>value</code>、<code>writable</code>、<code>get</code> 和 <code>set</code> 中的任意一个键，那么它将被认为是一个数据描述符。如果一个描述符同时拥有 <code>value</code> 或 <code>writable</code>
+和 <code>get</code> 或 <code>set</code> 键，则会产生一个异常。</p>
+<p>了解到这里已经够我们去理解Vue2.x的响应式原理了。</p>
+<p>我们再填一下上面的坑：</p>
+<p>如果对象中不存在指定的属性，<code>Object.defineProperty()</code> 会创建这个属性。当描述符中省略某些字段时，这些字段将使用它们的默认值。 搬一下MDN的代码：</p>
+<pre><code class="language-javascript">var o = {}; // 创建一个新对象
+
+// 在对象中添加一个属性与数据描述符的示例
+Object.defineProperty(o, &quot;a&quot;, {
+  value : 37,
+  writable : true,
+  enumerable : true,
+  configurable : true
+});
+
+// 对象 o 拥有了属性 a，值为 37
+
+// 在对象中添加一个设置了存取描述符属性的示例
+var bValue = 38;
+Object.defineProperty(o, &quot;b&quot;, {
+  // 使用了方法名称缩写（ES2015 特性）
+  // 下面两个缩写等价于：
+  // get : function() { return bValue; },
+  // set : function(newValue) { bValue = newValue; },
+  get() { return bValue; },
+  set(newValue) { bValue = newValue; },
+  enumerable : true,
+  configurable : true
+});
+
+o.b; // 38
+// 对象 o 拥有了属性 b，值为 38
+// 现在，除非重新定义 o.b，o.b 的值总是与 bValue 相同
+
+// 数据描述符和存取描述符不能混合使用
+Object.defineProperty(o, &quot;conflict&quot;, {
+  value: 0x9f91102,
+  get() { return 0xdeadbeef; }
+});
+// 抛出错误 TypeError: value appears only in data descriptors, get appears only in accessor descriptors
+</code></pre>
+<h2 id="响应式原理"><a class="header" href="#响应式原理">响应式原理</a></h2>
+<p>所谓响应式，即，一个值变化的时候要根据这个变化，产生相应的行为。</p>
+<p>在浏览器上，dom渲染完成之后，那么如果你不主动通过dom修改操作来重新渲染，那么这个dom就永远不变了。
+那如果dom上渲染的是X的值，X变了怎么办呢。难不成你每次给X赋值的时候，都手动document.balabala吗？</p>
+<p>看过上面的set属性之后你可能就想明白了，重点再复习一下：</p>
+<p><strong>当属性值被修改时，会调用此函数。</strong></p>
+<p>锵锵锵，简单来说就是用<code>get</code>和<code>set</code>来实现的啦。</p>
+<h3 id="简单实现"><a class="header" href="#简单实现">简单实现</a></h3>
+<p>话不多说，直接上代码 。</p>
+<pre><code class="language-javascript">let x;
+
+let f = function (v) {
+  return v * 100;
+}
+
+// 变化之后的处理函数
+let active;
+
+const onXChange = (cb) =&gt; {
+  active = cb;
+  // 初始化的时候就需要执行一次
+  active()
+}
+
+// 工厂
+const ref = (value) =&gt; {
+  let initValue = value;
+  return Object.defineProperty({}, &quot;value&quot;, {
+    get() {
+      return initValue;
+    },
+    set(newVal) {
+      initValue = newVal;
+      active();
+    }
+  })
+}
+
+// 初始化
+x = ref(1);
+
+// 添加回调
+onXChange(() =&gt; {
+  console.log(f(x.value));
+})
+
+x.value = 2;
+x.value = 3;
+</code></pre>
+<p>上述的写法有点问题。如果，不光是一个callback，有多个callback如何处理？</p>
+<p>一个active不够用。所以我们需要一个地方进行依赖收集。（即，多个组件依赖这个数据，每个组件都需要进行变化。）</p>
+<h3 id="带依赖收集"><a class="header" href="#带依赖收集">带依赖收集</a></h3>
+<p>变化后的代码如下：</p>
+<pre><code class="language-javascript">/* eslint-disable no-debugger */
+let x;
+
+let f = function (v) {
+  return v * 100;
+}
+
+let active;
+
+const onXChange = (cb) =&gt; {
+  active = cb;
+  active();
+  active = null;
+}
+class Dep {
+  deps = new Set();
+  depend() {
+    if (active) {
+      this.deps.add(active);
+    }
+  }
+  notify() {
+    this.deps.forEach(dep =&gt; dep());
+  }
+}
+
+const ref = (value) =&gt; {
+  let initValue = value;
+  let deps = new Dep();
+
+  return Object.defineProperty({}, &quot;value&quot;, {
+    get() {
+      deps.depend();
+      return initValue;
+    },
+    set(newVal) {
+      initValue = newVal;
+      deps.notify();
+    }
+  })
+}
+
+x = ref(1);
+
+onXChange(() =&gt; {
+  console.log(f(x.value));
+})
+
+onXChange(() =&gt; {
+  console.log(x.value + 1);
+})
+
+x.value = 2;
+x.value = 3;
+</code></pre>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                                                    <a rel="prev" href="../React/ReactHooks详解.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+                        
+                                                    <a rel="next" href="../Vue/异步更新队列.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+                        
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                                    <a rel="prev" href="../React/ReactHooks详解.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+                
+                                    <a rel="next" href="../Vue/异步更新队列.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+                            </nav>
+
+        </div>
+
+        
+        
+        
+                <script type="text/javascript">
+            window.playground_copyable = true;
+        </script>
+        
+        
+                <script src="../elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../searcher.js" type="text/javascript" charset="utf-8"></script>
+        
+        <script src="../clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+        
+        
+    </body>
+</html>
